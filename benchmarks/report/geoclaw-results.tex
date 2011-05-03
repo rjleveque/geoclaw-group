@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+
+\usepackage{amsmath,amsfonts,amssymb}
+
+\usepackage{color}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=black,filecolor=blue,urlcolor=blue]{hyperref}
+\newcommand{\todo}[1]{{\bf \color{blue} [#1]}}
+\newcommand{\alert}[1]{{\bf \color{red} [#1]}}
+
+\setlength{\textwidth}{6.2in}
+\setlength{\oddsidemargin}{0.3in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{8.7in}
+\setlength{\voffset}{-.7in}
+\setlength{\headsep}{26pt}
+
+\input{RJLmacros}
+
+\graphicspath{{./}}
+
+\begin{document}
+
+\begin{center}
+{{\Large\bf
+GeoClaw Results for \\
+NTHMP Tsunami Benchmark Problems}
+\vskip 5pt
+Version of \today}
+\end{center}
+
+% NTHMP Model validation workshop : draft reporting template
+
+\vskip 15pt
+\noindent
+{\bf Team:}  GeoClaw Tsunami Modeling Group, University of Washington
+
+\vskip 5pt
+\noindent
+{\bf Geographic area:}  The west coast, with a focus on Washington State,
+including Puget Sound, the San Juan Island group, and other islands in the
+Strait of Juan de Fuca.
+
+\vskip 5pt
+\section{Introduction}
+
+(Describe your NTHMP funded effort regarding inundation mapping, i.e., which
+area this covers, which types of tsunami sources are affecting your area and
+hence which benchmark problems in the list you will be addressing and why.)
+
+Funding is expected from NTHMP partner FEMA’s Risk Mapping, Assessment, and
+Planning (Risk MAP) Program, as part of the BakerAECOM coastal engineering
+effort for the FEMA California Coastal Analysis and Mapping (CCAMP) Project.
+Funding will also be sought to provide Washington State with tsunami
+modeling and mapping in support of tsunami hazard assessment and emergency
+management planning and education.  Tsunami sources in these geographic
+areas include earthquakes and landslides, and we will therefore address
+benchmark problems that deal with these sources.
+
+\section{Model description}
+(Describe and give relevant references to the model(s) you are using for
+your tsunami source, propagation, and coastal impact/inundation simulations.
+As a minimum, provide general information on the type of models you are
+using, including related restriction/assumptions. Refer to (preferably peer
+reviewed) papers where your model equations and other relevant validation
+and/or case studies for tsunami or otherwise have been published.)
+
+\section{Benchmark results}
+(For each selected (PMEL) benchmark problem, please document how you defined
+your model input data, grid and various other parameters to simulate each
+problem. 
+
+Provide results as figures (and raw data) following future formatting
+instructions, to the relevant site and/or coordinator. Also summarize your
+results as simple error indicators of the performance of the model (e.g.,
+mean, max, rms errors).)
+
+PMEL-135 refers to \cite{SynolakisBernard:pmel135}.
+
+\subsection{BP 1:
+  Single wave on a simple beach (Analytic)}
+
+{\bf Documentation:}  PMEL-135, pp 5 \& 18-30.
+
+\subsection{BP 2:
+ Solitary wave on composite beach (Analytic)}
+
+{\bf Documentation:}  PMEL-135, pp 5 \& 30-33
+
+\subsection{BP 3:
+ Saucer landslide (Laboratory)}
+
+\subsection{BP 4:
+ Single wave on simple beach (Laboratory)}
+
+{\bf Documentation:}  PMEL-135, pp 6 \& 34-37.
+
+\subsection{BP 5:
+ Solitary wave on composite beach (Laboratory) }
+
+{\bf Documentation:}  PMEL-135, pp 6 \& 37-39.
+
+\subsection{BP 6:
+ Solitary wave on a conical island (Laboratory)}
+
+{\bf Documentation:}  PMEL-135, pp 6 \& 39-45
+
+\newpage
+\subsection{BP 7:
+ Monai valley beach (Laboratory)}
+
+{\bf Documentation:}  PMEL-135, pp 6 \& 45-46.
+
+\subsubsection{Problems encountered}
+
+\begin{itemize}
+\item The input data only goes out to 20 seconds.
+
+\item The first waves are modeled well but later waves are not seen in the
+computation.  This is perhaps related to first point.  
+
+\item Data is not provided for run-up in the valley.
+\end{itemize}
+
+\subsubsection{What we did}
+
+\begin{itemize}
+\item Used $g=9.81$ and no friction.
+\item Used given initial wave to specify a boundary condition at the left
+boundary up to time 20.
+\item After time 20, switched to non-reflecting at left boundary, so
+reflected waves exit.  
+(Wave tank was much longer than computational domain specified.)
+\item Solved on $423\times 243$ grid (same as bathymetry)
+\item Solved on $160\times 100$ grid (not aligned with bathymetry)
+\end{itemize} 
+
+\subsubsection{Gauge comparisons}
+
+See \Fig{bp7gauges}.
+
+\begin{figure}[ht]
+\hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0001fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0001fig300.png}\hfil
+\vskip 5pt
+\hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0002fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0002fig300.png}\hfil
+\vskip 5pt
+\hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0003fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0003fig300.png}\hfil
+\caption{\label{fig:bp7gauges} 
+Left column: on $423\times 243$ grid (same as given bathymetry).
+Right column: $160\times 100$ grid (coarser and not aligned with
+bathymetry).
+  }
+\end{figure}
+
+
+\clearpage
+\newpage
+\subsection{BP 8:
+ 3D landslide (Laboratory)}
+
+\subsection{BP 9:
+ Okushiri island (Field)}
+
+{\bf Documentation:}  PMEL-135, pp 8 \& 48-53.
+
+\subsection{BP 10:
+ PNG landslide-generated tsunami (Field)}
+
+\subsection{BP 11:
+ Landslide (Lab)}
+
+\section{Lessons learned}
+
+(Make any relevant comments or observation regarding the benchmark itself,
+the available data provided, the relevance of the benchmark to tsunami
+science in general and to validating your specific model in particular. 
+Report problems and make recommendations regarding improving the benchmark
+or its data, as appropriate.)
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
+
