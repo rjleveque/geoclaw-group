@@ -7,6 +7,13 @@ function setplot is called to set the plot parameters.
     
 """ 
 
+from numpy import loadtxt
+
+try:
+    labgage = loadtxt('WaveGages.txt',skiprows=1)
+except:
+    print "*** Did not find WaveGages.txt from benchmark"
+
 #--------------------------
 def setplot(plotdata):
 #--------------------------
@@ -236,10 +243,6 @@ def setplot(plotdata):
         from pylab import plot, legend, loadtxt
         t = current_data.t
         plot(t, 0*t, 'k')
-        try:
-            labgage = loadtxt('WaveGages.txt',skiprows=1)
-        except:
-            print "*** Did not find WaveGages.txt from benchmark"
         gaugeno = current_data.gaugeno
         
         if gaugeno in [1,2,3]:
@@ -279,8 +282,7 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    #plotdata.print_framenos = [4,6,8,10,12]
-    plotdata.print_framenos = 'all'          # list of frames to print
+    plotdata.print_framenos = [4,6,8,10,12]
     plotdata.print_gaugenos = [1,2,3,12]  # list of gauges to print
     plotdata.print_fignos = 'all'            # list of figures to print
     plotdata.html = True                     # create html files of plots?

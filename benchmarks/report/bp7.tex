@@ -19,13 +19,28 @@ computation.  This is perhaps related to first point.
 
 \begin{itemize}
 \item Used $g=9.81$ and no friction.
-\item Used given initial wave to specify a boundary condition at the left
-boundary up to time 20.
-\item After time 20, switched to non-reflecting at left boundary, so
-reflected waves exit.  
-(Wave tank was much longer than computational domain specified.)
-\item Solved on $423\times 243$ grid (same as bathymetry)
-\item Solved on $160\times 100$ grid (not aligned with bathymetry)
+\item We used the given initial wave to specify a boundary condition at the left
+boundary up to time 20.  This was done by filling ghost cells each time step
+at the left edge of the computational domain, with cell centers at $x = -
+\frac 1 2 \Delta x$ and $x = -\frac 3 2 \Delta x$.
+The depth at any such point $x_0$ at arbitrary time $t_0$ should be roughly
+the same as the depth at $x=0$ at time $t_0 - x_0/c_0$, where $c_0 =
+\sqrt{gh_0}$ is the wave speed based on the constant depth.  This value was
+estimated by 
+interpolating from the given time trace at $x=0$.
+To fully specify the ghost cell values we also need the velocity or momentum
+in these cells.  This is estimated by assuming the wave is a right-going
+simple wave, so that the Riemann invariant $u - 2\sqrt{gh}$ is constant
+through the wave.  Inserting the interpolated $h$ value and then setting this
+equal to $-2\sqrt{gh_0}$ gives the expression for the velocity $u$ used in
+the ghost cell.
+
+\item After time 20, switched to non-reflecting boundary condition 
+at left boundary, so reflected waves exit.  
+(Note that the wave tank was much longer than computational domain specified.)
+\item We solved on $423\times 243$ grid (same as bathymetry)
+\item We also solved on $160\times 100$ grid (coarser grid, 
+not aligned with bathymetry) for comparison.
 \end{itemize} 
 
 \subsubsection{Gauge comparisons}
@@ -50,9 +65,9 @@ bathymetry).
 
 \subsection{Lessons learned}
 
-(Make any relevant comments or observation regarding the benchmark itself,
+\todo{Make any relevant comments or observation regarding the benchmark itself,
 the available data provided, the relevance of the benchmark to tsunami
 science in general and to validating your specific model in particular. 
 Report problems and make recommendations regarding improving the benchmark
-or its data, as appropriate.)
+or its data, as appropriate.}
 
