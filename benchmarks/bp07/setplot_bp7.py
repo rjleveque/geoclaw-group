@@ -122,6 +122,7 @@ def setplot(plotdata):
 
     # Gauge trace:
     plotaxes = plotfigure.new_plotaxes()
+    plotaxes.show = False
     plotaxes.axescmd = "axes([.1,.1,.8,.3])"
     plotaxes.xlimits = 'auto'
     plotaxes.ylimits = [-0.02, 0.05]
@@ -217,7 +218,7 @@ def setplot(plotdata):
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
-    plotaxes.xlimits = [0,60]
+    plotaxes.xlimits = [0,25]
     plotaxes.ylimits = [-0.02, 0.05]
     plotaxes.title = 'Surface'
 
@@ -245,9 +246,10 @@ def setplot(plotdata):
         plot(t, 0*t, 'k')
         gaugeno = current_data.gaugeno
         
-        if gaugeno in [1,2,3]:
-            plot(labgage[:,0],0.01*labgage[:,gaugeno],'r')
-            legend(('GeoClaw','topography','sea level','lab data'),loc='upper right')
+        if gaugeno in [5,7,9]:
+            col = (gaugeno-3)/2
+            plot(labgage[:,0],0.01*labgage[:,col],'r')
+            legend(('GeoClaw','topography','sea level','lab data'),loc='upper left')
         else:
             legend(('GeoClaw','topography','sea level'),loc='upper right')
             
@@ -282,8 +284,9 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    plotdata.print_framenos = [4,6,8,10,12]
-    plotdata.print_gaugenos = [1,2,3,12]  # list of gauges to print
+    #plotdata.print_framenos = [4,6,8,10,12]
+    plotdata.print_framenos = [5,7,9,11,13]
+    plotdata.print_gaugenos = [0,5,7,9]      # list of gauges to print
     plotdata.print_fignos = 'all'            # list of figures to print
     plotdata.html = True                     # create html files of plots?
     plotdata.html_homelink = '../README.html'   # pointer for top of index
