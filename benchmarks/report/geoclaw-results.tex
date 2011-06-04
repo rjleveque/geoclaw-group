@@ -65,23 +65,114 @@ areas include earthquakes and landslides, and we will therefore address
 benchmark problems that deal with these sources.
 
 \section{Model description}
+\todo{
 (Describe and give relevant references to the model(s) you are using for
 your tsunami source, propagation, and coastal impact/inundation simulations.
 As a minimum, provide general information on the type of models you are
 using, including related restriction/assumptions. Refer to (preferably peer
 reviewed) papers where your model equations and other relevant validation
 and/or case studies for tsunami or otherwise have been published.)
+}
+
+The GeoClaw software is described in some detail in
+\cite{BergerGeorgeLeVequeMandli:awr10,LeVequeGeorgeBerger:an11} and in the
+on-line documentation \cite{geoclaw-doc}.  GeoClaw is a variant of the
+Clawpack open source
+software \cite{claw.org-doc} that LeVeque and collaborators have
+been developing since 1994.  The ``wave-propagation algorithms'' used in
+this software are described in great detail in the textbook
+\cite{rjl:fvmhp} and in several journal publications
+\cite{rjl:advect,rjl:waveprop,jol-rjl:3d}.
+
+Adaptive mesh refinement (AMR) has been
+incorporated since the inception of this software, 
+in joint work with Marsha Berger at the
+Courant Institute of Mathematical Sciences, one of the foremost authorities
+on block structured AMR technology, often referred to as
+Berger-Colella-Oliger style AMR \cite{berger-colella, berger-oliger}.  The
+AMR algorithms in Clawpack are described in detail in
+\cite{mjb-rjl:amrclaw}.  
+
+GeoClaw was initiated in the PhD work of David George
+\cite{dgeorge:phd,rjl-george:catalina04a,dg-rjl:tsunami06,George2008} and
+was originally called TsunamiClaw.  It has more recently been extended to
+handle other geophysical flows such as storm surge \cite{mandli:?}
+dam break problems \cite{George:Malpasset}, and debris flows
+\cite{GeorgeIverson2011}.
+
+The GeoClaw model solves the two-dimensional nonlinear shallow water equations 
+using high-resolution finite volume methods.  Values of $h$, $hu$, and $hv$
+in each grid cell represent cell averages of the depth and momentum
+components.  With flat bathymetry, the methods are exactly conservative for
+both mass and momentum, and conserve mass for arbitrary bathymetry when used
+on a fixed grid. They do not exactly conserve mass during regridding when
+adaptive mesh refinement is used (discussed further below).
+
+These methods are based on Godunov's method, which means that at each cell
+interface a one-dimensional Riemann problem is solved normal to the edge,
+which reduces to a one-dimensional shallow water model with piecewise
+constant initial data,
+with left and right values given by the cell averages on each side.
+The jump in bathymetry between the cells is incorporated into the Riemann
+solution in a manner that makes the method ``well balanced'': the steady
+state of the ocean at rest is exactly maintained.  This is done using the
+``f-wave formulation'' of the wave propagation method, as discussed in
+\cite{BaleLeVequeEtAl2002,George2008,rjl:fvmhp,rjl:wbfwave10}.
+
+
+Godunov's method consists of solving the Riemann problem and using the
+resulting wave structure to update cell averages in the adjacent finite
+volume cells.  In practice an approximate Riemann solution is used, which
+reduces to the standard Roe solver \cite{rjl:fvmhp,roe:rs}
+in f-wave form in general, but is modified
+to also handle dry states in order to model inundation \cite{George2008}.
+
+\subsection{Other validation studies}
+
+Validation studies of the GeoClaw software are presented in the following
+papers:
+
+\begin{itemize}
+\item In \cite{BergerGeorgeLeVequeMandli:awr10} a test problem is used that
+consists of a radially symmetric ocean with a continental shelf, and
+a radially symmetric initial
+hump of water at the center.  At one position along the coast a 
+island is placed on the shelf.  Several gauges are located near the island.
+If the island is rotated to a different position on the coast the results at
+the gauges should be identical.  Numerically they will not be identical due
+to differences in how the coast intersects the Cartesian grid.  Very similar
+results are obtained for locations near an axis and near the diagonal, both
+in gauge results and in plots of the surface and inundation.  This is true
+even when AMR is used to concentrate fine grids only in the direction
+towards the island.  In this paper the Chile 2010 tsunami is also used as a
+test problem and good agreement with measured results at DART Buoy 21413??
+are obtained, on two different grid resolutions to test convergence.
+
+\item Further tests of this same problems are presented in
+\cite{LeVequeGeorgeBerger:an11}.  
+
+\item In \cite{mjb-dac-ch-rjl:amrsphere09} tests are performed for a
+tsunami-like wave propagating on the full sphere, using a novel mapped grid
+that covers the sphere with a logically rectangular finite volume grid.
+Tests are presented in which the bathymetry and the initial conditions are
+axisymmetric so that the solution should remain so and can be compared to
+fine grid one-dimensional simulations.  
+\end{itemize} 
+
+
+
 
 \section{Benchmark results}
-(For each selected (PMEL) benchmark problem, please document how you defined
+\todo{(For each selected (PMEL) benchmark problem, please document how you defined
 your model input data, grid and various other parameters to simulate each
 problem. 
 
 Provide results as figures (and raw data) following future formatting
 instructions, to the relevant site and/or coordinator. Also summarize your
 results as simple error indicators of the performance of the model (e.g.,
-mean, max, rms errors).)
+mean, max, rms errors).)}
 
+In the sections below,
 PMEL-135 refers to \cite{SynolakisBernard:pmel135}.
 
 \include{bp1}

@@ -39,27 +39,31 @@ the ghost cell.
 at left boundary, so reflected waves exit.  
 (Note that the wave tank was much longer than computational domain specified.)
 \item We solved on $423\times 243$ grid (same as bathymetry)
-\item We also solved on $160\times 100$ grid (coarser grid, 
-not aligned with bathymetry) for comparison.
+\item We also solved on $211\times 121$ grid, coarser by roughly a factor of
+2, for comparison as a test of convergence.
 \end{itemize} 
 
 \subsubsection{Gauge comparisons}
 
-See \Fig{bp7gauges}.
+\Fig{bp7gauges} shows a comparison of the GeoClaw results with the
+laboratory values at the three gauges requested, with both grid resolutions. 
+The two resolutions give very comparable results, indicating that the
+solution presented is close to a converged solution of the shallow water
+equations.  The results are in general a good match to the laboratory
+measurements.
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0005fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0005fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0005fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0007fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0007fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0007fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0009fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0009fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0009fig300.png}\hfil
 \caption{\label{fig:bp7gauges} 
 Left column: on $423\times 243$ grid (same as given bathymetry).
-Right column: $160\times 100$ grid (coarser and not aligned with
-bathymetry).
+Right column: $211\times 121$ grid.
   }
 \end{figure}
 
@@ -123,6 +127,7 @@ Right column: Zoomed view of computation.
   }
 \end{figure}
 
+\subsection{Runup in the valley}
 
 \subsection{Lessons learned}
 
