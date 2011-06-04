@@ -112,13 +112,15 @@ equations",
   URL = {http://www.amath.washington.edu/~rjl/pubs/wpalg/}
 }
 
-@Misc{BergerGeorgeLeVequeMandli:awr10,
-  author = {M. J. Berger and D. L. George and R. J. LeVeque and K. T. Mandli},
-  title = {The {GeoClaw} software for depth-averaged flows with adaptive
-  refinement},
-  year = {2010},
-  howpublished = {Submitted to AWR, {\tt www.clawpack.org/links/papers/awr10}}
+@article{BergerGeorgeLeVequeMandli:awr11,
+  author="M. J. Berger and D. L. George and R. J. LeVeque and K. T. Mandli",
+  title="The {GeoClaw} software for depth-averaged flows
+with adaptive refinement",
+  journal="Adv. Water Res.",
+  year="2011",
+  url="\url{www.clawpack.org/links/papers/awr11}",
 }
+
 
 @Article{Bourgeois:2009p888,
   author = {J. Bourgeois},
@@ -1366,105 +1368,32 @@ doi = {10.1007/s11069-010-9688-1},
 }
 
 
-%------------
-% Web pages
-% Start them with ZZ- so the end up at the bottom, use www0 for citing
-% Run fixbbl.py to fix these.
-%------------
 
 
-@Web{claw.org,
-  author={{ZZ-Clawpack}},
-  note =  "{\sf www0}: {Clawpack software} {\sf www.clawpack.org}",
-  year = {{\sf www0}}
+@misc{claw.org,
+  author =       "R. J. LeVeque and M. J. Berger and others",
+  title =        "Clawpack software",
+  note =         "\url{http://www.clawpack.org}"
 }
 
-@Web{claw.org-doc,
-  author = "{ZZ-Clawpack documentation}",
-  note = "{\sf www0}: {Clawpack documentation} {\sf www.clawpack.org/doc}",
-  year = {{\sf www0}}
-}
-
-@Web{Comcot,
-  author = {ZZ-{COMCOT}},
-  year = {{\sf www0}},
-  note = {{\sf www0}: {{COMCOT} software}
-  {\sf http://ceeserver.cee.cornell.edu/pll-group/comcot.htm}}
-}
-
-
-@Web{amroc,
-  author = {ZZ-{AMROC}},
-  year = {{\sf www0}},
-  note = {{\sf www0}: {AMROC software} {\sf http://amroc.sourceforge.net/}}
-}
-
-@Web{an11-web,
-  author = {ZZ-{webpage for this paper}},
-  year = {{\sf www0}},
-  note = {{\sf www0}: {Webpage for this paper} {\sf http://www.clawpack.org/links/an11}}
-}
-
-@Web{dart-data,
-  author = {ZZ-{DART Data}},
-  year = {{\sf www0}},
-  note = {{\sf www0}: {DART Data} {\sf http://www.ndbc.noaa.gov/}}
-}
-
-
-@Web{flash,
-  author = {ZZ-{FLASH}},
-  year = {{\sf www0}},
-  note = {{\sf www0}: {FLASH software}  {\sf
-http://flash.uchicago.edu/website/home/}}
-}
 
 @misc{geoclaw-doc,
-  author = {ZZ-{GeoClaw documentation}},
-  note = {{\sf www0:} {GeoClaw software} {\sf href{http://www.clawpack.org/geoclaw}}},
-  year = {{\sf www0}},
+  author = {{GeoClaw documentation}},
+  note = {\url{http://www.clawpack.org/geoclaw}},
+  year = 2011,
 }
 
-@Web{ngdc-coastal,
-  author = {ZZ-{NOAA DEMs}},
-  year = {{\sf www0}},
-  note = {{\sf www0:} {NOAA Tsunami Inundation Digital Elevation Models
-(DEMs)} {\sf http://www.ngdc.noaa.gov/mgg/inundation/tsunami/}}
+@book{rjl:fdm,
+  author="R. J. LeVeque",
+  title="Finite Difference Methods for Ordinary and Partial Differential
+Equations, Steady State and Time Dependent Problems",
+  publisher="SIAM",
+  address="Philadelphia",
+  year="2007"
 }
 
-@Web{ngdc-grid,
-  author = {ZZ-{National Geophysical Data Center {(NGDC) GEODAS} Grid
-Translator}},
-  year = {{\sf www0}},
-  note = {{\sf www0:} {National Geophysical Data Center {(NGDC) GEODAS} {\sf
-http://www.ngdc.noaa.gov/mgg/gdas/gd\_designagrid.html}}}
-}
 
-@Web{ngdc-hilo,
-  author = {ZZ-{Hilo, HI 1/3 arc-second MHW Tsunami Inundation DEM}},
-  note = {{\sf www0: {Hilo, HI 1/3 arc-second MHW Tsunami Inundation DEM}
-{\sf http://www.ngdc.noaa.gov/mgg/inundation/}}},
-  year = {{\sf www0}},
-}
-
-@Web{samrai,
-  author = {ZZ-{SAMRAI}},
-  year = {{\sf www0}},
-  note = {{\sf www0:} {SAMRAI}, {\sf https://computation.llnl.gov/casc/SAMRAI/}}
-}
-
-@Web{usgs-chile2010,
-  author = {ZZ-{USGS earthquake data}},
-  note = {{\sf www0}: {USGS source for 27 February 2010 earthquake},
-  {\sf http://earthquake.usgs.gov/earthquakes/eqinthenews/2010/us2010tfan/}},
-  year = {{\sf www0}},
-}
-
-@Web{chombo,
-  author = {ZZ-{Chombo}},
-  year = {{\sf www0}},
-  note = {{\sf www0:} {Chombo software}, {\sf http://seesar.lbl.gov/anag/chombo/}}
-}
+# new:
 
 @article{LeVequeGeorgeBerger:an11,
   author="R. J. LeVeque and D. L. George and M. J. Berger",
@@ -1473,4 +1402,36 @@ http://www.ngdc.noaa.gov/mgg/gdas/gd\_designagrid.html}}}
   year="2011",
   pages="211-289",
   misc="{\url{www.clawpack.org/links/papers/an11}}"
+}
+@article{MatsuyamaTanaka:monai,
+  author="M. Matsuyama and H. Tanaka",
+  title="An experimental study of the highest run-up height in the 1993
+{Hokkaido Nansei-oki} earthquake tsunami",
+  journal="ITS Proceedings",
+  year="2001",
+  pages="879-889"
+}
+@misc{ZhangYuenEtal:2011,
+  author="S. Zhang and D. A. Yuen and A. Zhu and S. Song",
+  title="Use of Many-Core Architectures for High-Resolution Simulation of
+{Tohoku 2011 Tsunami} Waves",
+  howpublished="Submitted to Supercomputing 2011 conference",
+  year="2011"
+}
+@article{siamnews-tsunami,
+  author="J. Behrens and R. J. LeVeque",
+  title="Modeling and Simulating Tsunamis with an Eye
+to Hazard Mitigation",
+  journal="SIAM News",
+  volume="44",
+  number="4",
+  page="1",
+  year="May 2011"
+}
+@phdthesis{mandli:phd,
+  author="K. T. Mandli",
+  title="Finite Volume Methods for the Multilayer Shallow Water Equations
+with Applications to Storm Surges",
+  year="2011",
+  school="University of Washington"
 }
