@@ -63,10 +63,10 @@ def setrun(claw_pkg='geoclaw'):
         
 
     # Number of grid cells:
-    #clawdata.mx = 160
-    #clawdata.my = 100
-    clawdata.mx = 423
-    clawdata.my = 243
+    clawdata.mx = 211
+    clawdata.my = 121
+    #clawdata.mx = 423
+    #clawdata.my = 243
         
 
     # ---------------
@@ -99,7 +99,7 @@ def setrun(claw_pkg='geoclaw'):
     # Note that the time integration stops after the final output time.
     # The solution at initial time t0 is always written in addition.
 
-    clawdata.outstyle = 2
+    clawdata.outstyle = 1
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
@@ -109,7 +109,8 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 2:
         # Specify a list of output times.  
         import numpy
-        clawdata.tout =  list(numpy.linspace(14.25,25,44)) 
+        #clawdata.tout =  list(numpy.linspace(14.25,25,44)) 
+        clawdata.tout =  list(numpy.linspace(14.5,25,44)) 
         #clawdata.tout =  list(numpy.linspace(1,14,14)) + \
                          #list(numpy.linspace(14.25,22,32)) + \
                          #list(numpy.linspace(23,60,38))
@@ -119,7 +120,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 3:
         # Output every iout timesteps with a total of ntot time steps:
         iout = 1
-        ntot = 20
+        ntot = 1
         clawdata.iout = [iout, ntot]
     
 
@@ -236,7 +237,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.kcheck = 3     # how often to regrid (every kcheck steps)
     clawdata.ibuff  = 2     # width of buffer zone around flagged points
 
-    clawdata.restart = True
+    clawdata.restart = False
     # More AMR parameters can be set -- see the defaults in pyclaw/data.py
 
     return rundata

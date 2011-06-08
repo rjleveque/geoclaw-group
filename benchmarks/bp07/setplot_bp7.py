@@ -226,6 +226,7 @@ def setplot(plotdata):
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
     plotitem.plot_var = 3
     plotitem.plotstyle = 'b-'
+    plotitem.kwargs = {'linewidth':2}
 
     # Plot topo as green curve:
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
@@ -284,10 +285,10 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    #plotdata.print_framenos = [4,6,8,10,12]
-    plotdata.print_framenos = [5,7,9,11,13]
-    plotdata.print_gaugenos = [0,5,7,9]      # list of gauges to print
-    plotdata.print_fignos = 'all'            # list of figures to print
+    #plotdata.print_framenos = [5,7,9,11,13]
+    plotdata.print_framenos = [30,31,32,33,34]
+    plotdata.print_gaugenos = [5,7,9]      # list of gauges to print
+    plotdata.print_fignos = [10,300]             # list of figures to print
     plotdata.html = True                     # create html files of plots?
     plotdata.html_homelink = '../README.html'   # pointer for top of index
     plotdata.latex = True                    # create latex file of plots?
