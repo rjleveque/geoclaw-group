@@ -14,6 +14,8 @@ T = 0.082
 kb = 2*C / b
 kw = 2*C / w
 
+x_0 = [0.551, 0.617, 0.696, 0.763, 0.846, 0.877, 1.017]
+
 
 def zeta(xi,eta):
     zeta1 = (T/(1.-epsilon)) * (1./(cosh(kb*xi)*cosh(kw*eta)) - epsilon)
@@ -40,21 +42,21 @@ def plot_cross_sec():
 
 
 
-def x_dz(xi,eta,x_0):
+def x_dz(xi,eta,x_c):
     """
-    Convert xi,eta into x and dz when mass is centered at x_0.
+    Convert xi,eta into x and dz when mass is centered at x_c.
     """
 
-    xi_0 = x_0 / cos(theta)            # convert x_0 into distance along slope
+    xi_c = x_c / cos(theta)            # convert x_c into distance along slope
     xi_j = xi
-    zeta_j = zeta(xi_j - xi_0, eta)
+    zeta_j = zeta(xi_j - xi_c, eta)
     x_j =  cos(theta)*xi_j + sin(theta)*zeta_j
     z_j = -sin(theta)*xi_j + cos(theta)*zeta_j
     dz_j = z_j - (-tan(theta)*x_j)
     #import pdb; pdb.set_trace()
     return x_j,dz_j
 
-def plot_slope(eta, x_0):
+def plot_slope(eta, x_c):
 
     xi = linspace(0., 3., 1001)
     if type(eta) != list:
@@ -63,13 +65,13 @@ def plot_slope(eta, x_0):
     figure(2)
     clf()
     for eta_k in eta:
-        x,dz = x_dz(xi, eta_k, x_0)
+        x,dz = x_dz(xi, eta_k, x_c)
 
         z0 = -tan(theta)*x 
 
         plot(x, z0, 'k')
         plot(x, z0 + dz, 'b')
-        title("eta = %s, x_0 = %s" % (eta_k,x_0))
+        title("eta = %s, x_c = %s" % (eta_k,x_c))
 
     if 0:
         x2 = cos(theta)*x - sin(theta)*(z0+dz)
@@ -80,44 +82,57 @@ def plot_slope(eta, x_0):
     axis('scaled')
 
 
-def interp_dz(xi, eta, x_0, x):
+def interp_dz(xi, eta, x_c, x):
     from scipy import interpolate
-    x_j,dz_j = x_dz(xi, eta, x_0)
+    x_j,dz_j = x_dz(xi, eta, x_c)
     dz = interpolate.interp1d(x_j, dz_j, bounds_error=False, fill_value=0.)
     return dz(x)
 
 
 
-def interp_dz_2d(x,y,x_0):
+def interp_dz_2d(x,y,x_c):
     X,Y = meshgrid(x,y)
     dz = zeros(X.shape)
     xi = x*cos(theta)
     for j,eta in enumerate(y):
-        dz[j,:] = interp_dz(xi, eta, x_0, x)
+        dz[j,:] = interp_dz(xi, eta, x_c, x)
     return X,Y,dz
 
 def make_s(t):
     from scipy import interpolate
-    kdata = loadtxt("kinematics.txt",skiprows=1)
+    kdata = loadtxt("kinematics-new.txt",skiprows=1)
     t_j = kdata[:,0]
     sdata = zeros((len(t),7))
-    for k in range(1,8):
-        s_j = kdata[:,k]
-        sfunc = interpolate.interp1d(t,s_j)
-        sdata[:,k] = sfunc(t_j)
+    for k in range(7):
+        s_j = kdata[:,k+1]
+        sfunc = interpolate.interp1d(t_j,s_j)
+        sdata[:,k] = sfunc(t)
     return sdata
 
 
-def make_dtopo(x,y,x_i,t,sdata):
-    for k in range(7):
+def make_dtopo(x,y,x_0,t,sdata):
+    for k in range(2):
         s = sdata[:,k]
-        dtopo = open("dtopo%s.tt1" % k,"w")
+        fname  = "dtopo%s.tt1" % (k+1)
+        dtopo = open(fname,"w")
         for t_k,s_k in zip(t,s):
-            x_0 = x_i + s_k
-            X,Y,dz = interp_dz_2d(x,y,x_0)
+            x_c = x_0[k] + s_k
+            X,Y,dz = interp_dz_2d(x,y,x_c)
+            figure(3)
+            clf()
+            contour(X,Y,dz,linspace(0.01,0.1,10))
+            title('x0 = %s, time = %s' % (x_0[k],t_k))
+            draw()
             for j in range(len(y)-1, -1, -1):
                 for i in range(len(x)):
                     dtopo.write("%20.12e  %20.12e  %20.12e  %20.12e\n" \
                            % (t_k,x[i],y[j],dz[j,i]))
         dtopo.close()
+        print "Created ",fname
 
+def make_all_dtopo():
+    t = linspace(0,5,11)
+    sdata = make_s(t)
+    x = linspace(0,5,101)
+    y = linspace(0,1,21)
+    make_dtopo(x,y,x_0,t,sdata)
