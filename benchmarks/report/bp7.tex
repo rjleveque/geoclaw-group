@@ -2,24 +2,23 @@
 \subsection{BP 7:
  Monai valley beach (Laboratory)}
 
-\subsubsection{Problem specification}
+{\bf Documentation:}  PMEL-135, pp 6 \& 45-46.
+
+\subsubsection{Problems encountered}
 
 \begin{itemize}
+\item The input data only goes out to 20 seconds.
 
-\item PMEL-135, pp 6 \& 45-46.
+\item The first waves are modeled well but later waves are not seen in the
+computation.  This is perhaps related to first point.  
 
-\item Problem description provided by Dmitry \cite{bp7description}.
-
-\item The original experiment is fully described by Masuyama and Tanaka
-\cite{MatsuyamaTanaka:monai}.
-
-\end{itemize} 
+\item Data is not provided for run-up in the valley.
+\end{itemize}
 
 \subsubsection{What we did}
 
 \begin{itemize}
-\item We solved the nonlinear shallow water equations in Cartesian
-coordinates with $g=9.81$ and no friction.  
+\item Used $g=9.81$ and no friction.
 \item We used the given initial wave to specify a boundary condition at the left
 boundary up to time 20.  This was done by filling ghost cells each time step
 at the left edge of the computational domain, with cell centers at $x = -
@@ -36,37 +35,31 @@ through the wave.  Inserting the interpolated $h$ value and then setting this
 equal to $-2\sqrt{gh_0}$ gives the expression for the velocity $u$ used in
 the ghost cell.
 
-\item After time 20, the boundary condition procedure
-switched to non-reflecting boundary condition 
+\item After time 20, switched to non-reflecting boundary condition 
 at left boundary, so reflected waves exit.  
 (Note that the wave tank was much longer than computational domain specified.)
-\item We solved on $423\times 243$ grid (same as bathymetry), with no
-adaptive mesh refinement.
-\item We also solved on $211\times 121$ grid, coarser by roughly a factor of
-2, for comparison as a test of convergence.
+\item We solved on $423\times 243$ grid (same as bathymetry)
+\item We also solved on $160\times 100$ grid (coarser grid, 
+not aligned with bathymetry) for comparison.
 \end{itemize} 
 
 \subsubsection{Gauge comparisons}
 
-\Fig{bp7gauges} shows a comparison of the GeoClaw results with the
-laboratory values at the three gauges requested, with both grid resolutions. 
-The two resolutions give very comparable results, indicating that the
-solution presented is close to a converged solution of the shallow water
-equations.  The results are in general a good match to the laboratory
-measurements.
+See \Fig{bp7gauges}.
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0005fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0005fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0005fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0007fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0007fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0007fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0009fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0009fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0009fig300.png}\hfil
 \caption{\label{fig:bp7gauges} 
 Left column: on $423\times 243$ grid (same as given bathymetry).
-Right column: $211\times 121$ grid.
+Right column: $160\times 100$ grid (coarser and not aligned with
+bathymetry).
   }
 \end{figure}
 
@@ -74,7 +67,7 @@ Right column: $211\times 121$ grid.
 
 \subsubsection{Frame comparisons}
 
-See \Fig{bp7framesA} and \Fig{bp7framesB} for comparisons of the Frames 10,
+See \Fig{bp7framesA} and \Fig{bp7framesA} for comparisons of the Frames 10,
 25, 40, 55, and 70 from the overhead movie with GeoClaw results at roughly
 corresponding times.  These results are from the $423\times 243$ grid (same
 as given bathymetry).
@@ -86,7 +79,7 @@ stated that ``frame 10 approximately occurs at 15.3 seconds'', but then later
 ``it is recommend that each modeler find times of the snapshots that best fit
 the data''.   We found reasonably good agreement starting at 15 seconds for
 Frame 1 and then taking 0.5 second increments, as shown in \Fig{bp7framesA}
-and \Fig{bp7framesB}.
+and \Fig{bp7framesA}.
 
 The yellow dashed lines on the frames from the movie show the approximate
 shoreline (and were provided as part of the benchmark specification
@@ -111,7 +104,7 @@ detected in the movie frames.
 \hfil\includegraphics[width=1.5in]{bp7/movie/Frame40.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0009fig10.png}\hfil
 \caption{\label{fig:bp7framesA} 
-Left column: Frames 10, 25, and 40 from the movie.
+Left column: Frames from the movie.
 Right column: Zoomed view of computation.
   }
 \end{figure}
@@ -125,30 +118,11 @@ Right column: Zoomed view of computation.
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0013fig10.png}\hfil
 \vskip 5pt
 \caption{\label{fig:bp7framesB} 
-Left column: Frames 55 and 70 from the movie.
+Left column: Frames from the movie.
 Right column: Zoomed view of computation.
   }
 \end{figure}
 
-\begin{figure}[ht]
-\hfil\includegraphics[width=5.0in]{bp7/figs423/contours.png}\hfil
-\caption{\label{fig:bp7runup} 
-Maximum runup relative to observed location (white dot).
-  }
-\end{figure}
-
-\subsection{Runup in the valley}
-The file {\tt OBS\_RUNUP.txt} from the benchmark specification contains
-the runup at 3 locations as observed in 6 runs of the same wavetank
-experiment.  The relevant location for runup in the valley is the first
-point at $x=5.1575, y=1.88$ m.  The six values given are 0.0875, 0.09,
-0.08, 0.09, 0.1, 0.09, with an average value of approximately $0.09$.
-
-In the computation, the maximum runup was observed at time $t\approx 16.5$.
-This frame is shown in \Fig{bp7runup} with a white dot at the location
-$x=5.1575, y=1.88$ and several contour levels marked.  The contour lines are
-at levels 0.01 m apart.  The maximum runup appears to be around 0.08 to 0.10
-meters depending on what water depth is used to judge.
 
 \subsection{Lessons learned}
 
@@ -157,24 +131,4 @@ the available data provided, the relevance of the benchmark to tsunami
 science in general and to validating your specific model in particular. 
 Report problems and make recommendations regarding improving the benchmark
 or its data, as appropriate.}
-
-
-The input data only goes out to 20 seconds.
-The first waves are modeled well, but later waves  in the laboratory data
-(not shown here) are not seen in the
-computation.  If a longer time history was provided for the input data, it
-may be possible to match later waves better.  Note that the computational
-domain is only part of the wave tank, which was 205 m long
-\cite{MatsuyamaTanaka:monai}.
-Presumably it is impossible to obtain more data at this point.
-
-This benchmark problem appears to be a good test for tsunami models.  It has
-been widely used an many models have been shown to give results that agree
-quite well with the laboratory measurements.
-
-The benchmark problem specification could be improved by specifying the
-computational grid(s) that are to be used.  We show results for a grid that
-matches the resolution of the bathymetry provided and a second computation
-at half the resolution, but this should be specified as part of the problem.
-
 
