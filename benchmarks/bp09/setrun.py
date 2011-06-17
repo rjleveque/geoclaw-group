@@ -63,16 +63,16 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.ndim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.xlower = 130.  ##
-    clawdata.xupper = 250.  ##
+    clawdata.xlower = 137.6  ##
+    clawdata.xupper = 141.5  ##
 
-    clawdata.ylower = 20.  ##
-    clawdata.yupper = 60.  ##
+    clawdata.ylower = 39.6  ##
+    clawdata.yupper = 44.2  ##
 
 
     # Number of grid cells:
-    clawdata.mx = 60  ##
-    clawdata.my = 20  ##
+    clawdata.mx = 40  ##
+    clawdata.my = 50  ##
 
 
     # ---------------
@@ -109,8 +109,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout =  18##
-        clawdata.tfinal = 64800 ##
+        clawdata.nout =  10##
+        clawdata.tfinal = 600 ##
 #        clawdata.nout =  1##
 #        clawdata.tfinal = 1##
         
@@ -218,7 +218,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 6 ##
+    mxnest = 1 ##
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -284,40 +284,40 @@ def setgeo(rundata):
     geodata.coeffmanning =.025
     geodata.frictiondepth = 1.e6
 
-    okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/ \
-      FrankGonzalez/geoclaw-group/benchmarks/bp09/bathytoposource' ##
+    okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
+      + 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
     #honshu_dir = '/bulk/rjl/honshu/' ##
     
     # == settopo.data values ==
     geodata.topofiles = []
     # for topography, append lines of the form
     #   [topotype, minlevel, maxlevel, t1, t2, fname]
-    geodata.topofiles.append([3, 1, 1, 0., 1.e10, \
-        okushiri_dir + '/AO15.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([3, 1, 1, 0., 1.e10, \
-        okushiri_dir + '/MB05.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/M001.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK03.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK08.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24.xyz'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/depth40_138.txt'])  ## JODC 500 m
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/depth40_140.txt'])  ## JODC 500 m
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/depth42_138.txt'])  ## JODC 500 m
-    geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/depth42_140.txt'])  ## JODC 500 m
+    geodata.topofiles.append([1, 1, 1, 0., 1.e10, \
+        okushiri_dir + '/AO15.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0., 1.e10, \
+        okushiri_dir + '/MB05.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/MO01.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK03.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK08.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK24.tt1'])  ## Dmitry N.'s version of Kansai U.
+    # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/depth40_138.txt'])  ## JODC 500 m
+    # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/depth40_140.txt'])  ## JODC 500 m
+    # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/depth42_138.txt'])  ## JODC 500 m
+    # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/depth42_140.txt'])  ## JODC 500 m
                               
   # == setdtopo.data values ==
     geodata.dtopofiles = []
     # for moving topography, append lines of the form:  (<= 1 allowed for now!)
     #   [topotype, minlevel,maxlevel,fname]
-    geodata.dtopofiles.append([1,2,3, okushiri_dir + '/HNO1993.xyz'])  ## Dmitry N.'s version of Kansai U.
+    geodata.dtopofiles.append([1,2,3, okushiri_dir + '/HNO1993.txyz'])  ## Dmitry N.'s version of Kansai U.
 
     # == setqinit.data values ==
     geodata.iqinit = 0
@@ -331,11 +331,11 @@ def setgeo(rundata):
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     geodata.regions.append([1, 2, 0., 1e9, 0, 360, -90, 90])  ##
-    geodata.regions.append([1, 3, 0., 8000., 0., 360, -90, 90])  ##
+    # geodata.regions.append([1, 3, 0., 8000., 0., 360, -90, 90])  ##
     # restrict level 3 to follow closely behind leading wave:
-    for t in range(8000,50000,4000):
-        xmin = 140. + (t-8000.)/400.
-        geodata.regions.append([1, 3, t, t+4000, xmin,360,30,60])  ##
+    # for t in range(8000,50000,4000):
+    #     xmin = 140. + (t-8000.)/400.
+    #     geodata.regions.append([1, 3, t, t+4000, xmin,360,30,60])  ##
     #geodata.regions.append([1, 3, 21600., 34000, 180,360,30,60])  ##
     #geodata.regions.append([1, 3, 34000., 1e9, 200,360,30,60])  ##
    # geodata.regions.append([3, 4, 34000., 1e9, 235.7,235.9,41.7,41.75])  ##
@@ -344,28 +344,28 @@ def setgeo(rundata):
    # geodata.regions.append([4, 4, 0., 1e9, 235.7,235.9,41.7,41.75])  ##  Force level 4
    # geodata.regions.append([5, 5, 0., 1e9, 235.7,235.8,41.7,41.8])  ## Force level 5
    # geodata.regions.append([6, 6, 0, 1e9, 235.7964,235.8208,41.7333,41.7508])  ## Force level 6
-    geodata.regions.append([4, 5, 0., 1e9, 235.,236.,40.,43.])  ##  6-sec grid extent
-    geodata.regions.append([5, 6, 0, 1e9, 235.7655,235.8569,41.7165,41.7829])  ## 1-sec grid extent
+    # geodata.regions.append([4, 5, 0., 1e9, 235.,236.,40.,43.])  ##  6-sec grid extent
+    # geodata.regions.append([5, 6, 0, 1e9, 235.7655,235.8569,41.7165,41.7829])  ## 1-sec grid extent
 
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     
-    geodata.gauges.append([19750, 235.817, 41.745, 30000., 1.e10]) ##
+    geodata.gauges.append([1, 140.133, 41.867, 0.0, 1.e10]) ## Esashi Tide Gage
     
     ## The next part set up ngauges gauges along a transect between (x1,y1) and (x2,y2):
-    from numpy import linspace
-    ngauges = 10
-    sarray = linspace(0,1,ngauges)
-    x1 = 235.82917
-    y1 = 41.72083
-    x2 = 235.80833
-    y2 = 41.74167
-    dx = x2 - x1
-    dy = y2 - y1
-    for gaugeno in range(ngauges):
-        s = sarray[gaugeno]
-        geodata.gauges.append([gaugeno, x1+s*dx, y1+s*dy, 30000., 1.e10])
+    # from numpy import linspace
+    # ngauges = 10
+    # sarray = linspace(0,1,ngauges)
+    # x1 = 235.82917
+    # y1 = 41.72083
+    # x2 = 235.80833
+    # y2 = 41.74167
+    # dx = x2 - x1
+    # dy = y2 - y1
+    # for gaugeno in range(ngauges):
+    #     s = sarray[gaugeno]
+    #     geodata.gauges.append([gaugeno, x1+s*dx, y1+s*dy, 30000., 1.e10])
 
     # == setfixedgrids.data values ==
     geodata.fixedgrids = []
@@ -386,4 +386,3 @@ if __name__ == '__main__':
 	rundata = setrun()
 
     rundata.write()
-
