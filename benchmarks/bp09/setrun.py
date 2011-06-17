@@ -218,7 +218,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 1 ##
+    mxnest = 2 ##
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -284,9 +284,9 @@ def setgeo(rundata):
     geodata.coeffmanning =.025
     geodata.frictiondepth = 1.e6
 
-    okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
-      + 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
-    #honshu_dir = '/bulk/rjl/honshu/' ##
+    #okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
+      #+ 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
+    okushiri_dir = '.'  ## this directory
     
     # == settopo.data values ==
     geodata.topofiles = []
@@ -304,6 +304,9 @@ def setgeo(rundata):
         okushiri_dir + '/OK08.tt1'])  ## Dmitry N.'s version of Kansai U.
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
         okushiri_dir + '/OK24.tt1'])  ## Dmitry N.'s version of Kansai U.
+        
+    #geodata.topofiles = [[1, 1, 1, 0, 1.e10,'testbathy.tt1']]
+    
     # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
     #     okushiri_dir + '/depth40_138.txt'])  ## JODC 500 m
     # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \

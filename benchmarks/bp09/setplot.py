@@ -94,7 +94,7 @@ def setplot(plotdata):
     plotitem.imshow_cmap = geoplot.tsunami_colormap
     plotitem.imshow_cmin = -0.1
     plotitem.imshow_cmax = 0.1
-    plotitem.add_colorbar = False
+    plotitem.add_colorbar = True
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
 
@@ -107,8 +107,8 @@ def setplot(plotdata):
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
-    plotaxes.xlimits = [130,250]
-    plotaxes.ylimits = [25,60]
+    plotaxes.xlimits = [137.6,141.5]
+    plotaxes.ylimits = [39.6,44.2]
 
     # add contour lines of bathy if desired:
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
@@ -123,10 +123,10 @@ def setplot(plotdata):
 
 
     #-----------------------------------------
-    # Figure for zoom plot
+    # Figure for zoom plot  
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Zoom', figno=1)
-    plotfigure.show = True
+    plotfigure.show = False
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')
