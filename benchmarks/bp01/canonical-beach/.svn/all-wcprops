@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/tsunami-benchmarks/!svn/ver/94/canonical-beach
+END
+CanonicalBathymetry_H_0.03.csv
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/CanonicalBathymetry_H_0.03.csv
+END
+setplot.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/setplot.py
+END
+qinit_geo.f
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/tsunami-benchmarks/!svn/ver/94/canonical-beach/qinit_geo.f
+END
+maketopo.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/tsunami-benchmarks/!svn/ver/94/canonical-beach/maketopo.py
+END
+setrun.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/setrun.py
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/README.txt
+END
+CanonicalBathymetry_H_0.03.xls
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/CanonicalBathymetry_H_0.03.xls
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/tsunami-benchmarks/!svn/ver/93/canonical-beach/Makefile
+END
