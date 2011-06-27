@@ -1,0 +1,11 @@
+f = open('CanonicalBathymetry_H_0.03.txt','r').read()
+f2=f.replace('\r','\n')
+file2=open('file2.txt','w')
+file2.write(f2)
+file2.close()
+
+f = open('CanonicalBathymetry_H_0.0185.txt','r').read()
+f2=f.replace('\r','\n')
+file3=open('file3.txt','w')
+file3.write(f2)
+file3.close()

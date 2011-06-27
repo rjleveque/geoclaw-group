@@ -34,8 +34,6 @@ FFLAGS = -O3
 
 CLAW_SOURCES = \
   qinit_geo.f \
-  b4step2_geo.f \
-
 
 # Clawpack libraries to be used:
 CLAW_LIB = $(CLAW)/amrclaw/2d/lib
@@ -73,6 +71,7 @@ CLAW_LIBSOURCES = \
   $(GEOLIB)/setregions_geo.f \
   $(GEOLIB)/setgauges_geo.f \
   $(GEOLIB)/setfixedgrids_geo.f \
+  $(GEOLIB)/b4step2_geo.f \
   $(GEOLIB)/flag2refine_geo.f  \
   $(GEOLIB)/allowflag_geo.f  \
   $(GEOLIB)/dumpgauge_geo.f \

@@ -105,15 +105,15 @@ c     # set hu = hv = 0 in all these cells
       enddo
 
       write(26,*) 'B4STEP2: t, num_dtopo: ', t,num_dtopo
-      do i=1,num_dtopo
-          call movetopo(maxmx,maxmy,mbc,mx,my,
-     &      xlower,ylower,dx,dy,t,dt,maux,aux,
-     &      dtopowork(i0dtopo(i):i0dtopo(i)+mdtopo(i)-1),
-     &      xlowdtopo(i),ylowdtopo(i),xhidtopo(i),yhidtopo(i),
-     &      t0dtopo(i),tfdtopo(i),dxdtopo(i),dydtopo(i),dtdtopo(i),
-     &      mxdtopo(i),mydtopo(i),mtdtopo(i),mdtopo(i),
-     &      minleveldtopo(i),maxleveldtopo(i),topoaltered(i))
-      enddo
+c      do i=1,num_dtopo
+c          call movetopo(maxmx,maxmy,mbc,mx,my,
+c     &      xlower,ylower,dx,dy,t,dt,maux,aux,
+c     &      dtopowork(i0dtopo(i):i0dtopo(i)+mdtopo(i)-1),
+c     &      xlowdtopo(i),ylowdtopo(i),xhidtopo(i),yhidtopo(i),
+c     &      t0dtopo(i),tfdtopo(i),dxdtopo(i),dydtopo(i),dtdtopo(i),
+c     &      mxdtopo(i),mydtopo(i),mtdtopo(i),mdtopo(i),
+c     &      minleveldtopo(i),maxleveldtopo(i),topoaltered(i))
+c      enddo
 
 
       return
