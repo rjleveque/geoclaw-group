@@ -63,18 +63,45 @@ bathymetry).
   }
 \end{figure}
 
+
+
 \subsubsection{Frame comparisons}
 
-See \Fig{bp7framesA} and \Fig{bp7framesA}.
+See \Fig{bp7framesA} and \Fig{bp7framesA} for comparisons of the Frames 10,
+25, 40, 55, and 70 from the overhead movie with GeoClaw results at roughly
+corresponding times.  These results are from the $423\times 243$ grid (same
+as given bathymetry).
+
+The movie had a rate of 30 fps, so the frames are 0.5 seconds apart. However,
+it is not clear what the starting time was for Frame 1 relative to the
+simulation time.   In the Benchmark Description \cite{bp7description}, it is
+stated that ``frame 10 approximately occurs at 15.3 seconds'', but then later
+``it is recommend that each modeler find times of the snapshots that best fit
+the data''.   We found reasonably good agreement starting at 15 seconds for
+Frame 1 and then taking 0.5 second increments, as shown in \Fig{bp7framesA}
+and \Fig{bp7framesA}.
+
+The yellow dashed lines on the frames from the movie show the approximate
+shoreline (and were provided as part of the benchmark specification
+\cite{bp7description}).  The actual shoreline location is of course somewhat
+ambiguous in the movie, and also in the computation.  The figures of the
+GeoClaw computation show the shoreline two different ways:
+\begin{itemize}
+\item The cells colored blue are finite volume cells where the fluid depth is
+greater than 0.0001 m. Those colored green have less fluid or are dry.
+\item The black dashed line is a contour line where depth $= 0.002$ m, which
+agrees better with the movie frames and might be a depth that can actually be
+detected in the movie frames.
+\end{itemize} 
 
 \begin{figure}[ht]
-\hfil\includegraphics[width=1.5in]{bp7/Frame10.png}\hfil
+\hfil\includegraphics[width=1.5in]{bp7/movie/Frame10.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0005fig10.png}\hfil
 \vskip 5pt
-\hfil\includegraphics[width=1.5in]{bp7/Frame25.png}\hfil
+\hfil\includegraphics[width=1.5in]{bp7/movie/Frame25.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0007fig10.png}\hfil
 \vskip 5pt
-\hfil\includegraphics[width=1.5in]{bp7/Frame40.png}\hfil
+\hfil\includegraphics[width=1.5in]{bp7/movie/Frame40.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0009fig10.png}\hfil
 \caption{\label{fig:bp7framesA} 
 Left column: Frames from the movie.
@@ -84,10 +111,10 @@ Right column: Zoomed view of computation.
 
 
 \begin{figure}[ht]
-\hfil\includegraphics[width=1.5in]{bp7/Frame55.png}\hfil
+\hfil\includegraphics[width=1.5in]{bp7/movie/Frame55.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0011fig10.png}\hfil
 \vskip 5pt
-\hfil\includegraphics[width=1.5in]{bp7/Frame70.png}\hfil
+\hfil\includegraphics[width=1.5in]{bp7/movie/Frame70.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp7/figs423/frame0013fig10.png}\hfil
 \vskip 5pt
 \caption{\label{fig:bp7framesB} 
