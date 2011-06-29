@@ -4,7 +4,7 @@
 pdf:
 	pdflatex geoclaw-results
 
-bib: geoclaw-results.tex
+bib:    geoclaw-results.tex
 	pdflatex geoclaw-results
 	bibtex geoclaw-results
 	pdflatex geoclaw-results
