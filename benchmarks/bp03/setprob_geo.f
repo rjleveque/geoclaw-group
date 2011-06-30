@@ -5,10 +5,56 @@ c=========================================================================
       use geoclaw_module
       use topo_module
       use dtopo_module
+      use dz_module
 
       implicit double precision (a-h,o-z)
+      character*12 fname
+
 
       common /comrunup/ ybar1,ybar2
+
+      ! Read tk and sk arrays needed in dz_module:
+      call read_ts()
+
+      ! Set dz_module variables:
+
+
+      ! initial depth of mass:
+      iunit = 7
+      fname = 'setprob.data'
+c     # open the unit with new routine from Clawpack 4.4 to skip over
+c     # comment lines starting with #:
+      call opendatafile(iunit, fname)
+
+      read(7,*) d
+
+      if (dabs(d-0.061d0) .lt. 1e-10) then
+          scolumn = 1
+      elseif (dabs(d-0.080d0) .lt. 1e-10) then
+          scolumn = 2
+      elseif (dabs(d-0.100d0) .lt. 1e-10) then
+          scolumn = 3
+      elseif (dabs(d-0.120d0) .lt. 1e-10) then
+          scolumn = 4
+      elseif (dabs(d-0.140d0) .lt. 1e-10) then
+          scolumn = 5
+      elseif (dabs(d-0.149d0) .lt. 1e-10) then
+          scolumn = 6
+      elseif (dabs(d-0.189d0) .lt. 1e-10) then
+          scolumn = 7
+      else
+          write(6,*) "*** Error: Unrecognized d in setprob, d = ",d
+          stop
+      endif
+        
+
+      ! Initial x-location of mass:
+      x0 = d/tanth + Tprime/sinth
+      write(6,601) d, scolumn, x0
+ 601  format(" Using d = ",d10.3, "   experiment = ",i2, "  x0 = ",
+     &   d10.3)
+
+      ! Runup:
 
       ybar1 = 0.305
       ybar2 = 0.61

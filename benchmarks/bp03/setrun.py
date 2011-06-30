@@ -9,10 +9,26 @@ that will be read in by the Fortran code.
 import os
 from pyclaw import data
 import numpy as np
+from numpy import pi,tan,sin
+from scipy import sinh,cosh,tanh,arccosh
+
+# Set initial depth:
+d = 0.061
+
+# These don't change:
+theta = 15. * pi / 180.
+epsilon = 0.717
+C = arccosh(1. / epsilon)
+b = 0.395
+w = 0.680
+Tprime = 0.082 + 0.004
+kb = 2*C / b
+kw = 2*C / w
+x0 = d/tan(theta) + Tprime/sin(theta)
 
 
 #------------------------------
-def setrun(claw_pkg='geoclaw'):
+def setrun(claw_pkg='geoclaw', d_param = None):
 #------------------------------
 
     """
@@ -35,7 +51,12 @@ def setrun(claw_pkg='geoclaw'):
     # Problem-specific parameters to be written to setprob.data:
     #------------------------------------------------------------------
 
-    #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
+    # check for d set as argument (when using run_tests.py):
+    if d_param:
+        d = d_param
+
+    probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
+    probdata.add_param('d', d, 'initial depth of mass')
 
     #------------------------------------------------------------------
     # GeoClaw specific parameters:
@@ -64,15 +85,15 @@ def setrun(claw_pkg='geoclaw'):
 
     # Lower and upper edge of computational domain:
     clawdata.xlower = -1.0
-    clawdata.xupper = 6.0
+    clawdata.xupper = 6.2
 
     clawdata.ylower = 0
-    clawdata.yupper =  1.85
+    clawdata.yupper =  1.8
 
 
     # Number of grid cells:
-    clawdata.mx = 35
-    clawdata.my = 10
+    clawdata.mx = 72*4
+    clawdata.my = 18*4
 
 
     # ---------------
@@ -109,8 +130,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout = 100
-        clawdata.tfinal = 10.0
+        clawdata.nout = 20
+        clawdata.tfinal = 5.0
 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -122,7 +143,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 3:
         # Output every iout timesteps with a total of ntot time steps:
         iout = 1
-        ntot = 350
+        ntot = 20
         clawdata.iout = [iout, ntot]
 
 
@@ -214,14 +235,14 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 3
+    mxnest = 2
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    clawdata.inratx = [6,6]
-    clawdata.inraty = [6,6]
-    clawdata.inratt = [6,3]
+    clawdata.inratx = [10]
+    clawdata.inraty = [10]
+    clawdata.inratt = [1]
 
 
     # Specify type of each aux variable in clawdata.auxtype.
@@ -260,7 +281,7 @@ def setgeo(rundata):
         raise AttributeError("Missing geodata attribute")
 
     # == setgeo.data values ==
-    geodata.variable_dt_refinement_ratios = False
+    geodata.variable_dt_refinement_ratios = True
 
     geodata.igravity = 1
     geodata.gravity = 9.81
@@ -270,7 +291,7 @@ def setgeo(rundata):
 
     # == settsunami.data values ==
     geodata.sealevel = 0.
-    geodata.drytolerance = 1.e-3
+    geodata.drytolerance = 1.e-4
     geodata.wavetolerance = 5.e-3
     geodata.depthdeep = 1.e0
     geodata.maxleveldeep = 3
@@ -283,10 +304,11 @@ def setgeo(rundata):
     import os
     #topo=os.environ['TOPO']
     #topo = 'topo'
-    topopath0 = os.path.join('wavetank.asc')
-
+ 
+    # topo and dtopo are set in b4step2
+    
     geodata.topofiles = []
-    geodata.topofiles.append([1, 1, 2, 0.0, 5.e3, topopath0])
+    geodata.topofiles.append([1, 1, 1, 0.0, 9.e9, 'tank.tt1'])
 
     # == setdtopo.data values ==
     geodata.dtopofiles = []
@@ -305,17 +327,20 @@ def setgeo(rundata):
     geodata.regions = []
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
-    geodata.regions.append([3, 3, 0., 20.0, -0.4, 2, 0, 1])
-    geodata.regions.append([1, 2, 0., 20.0, -2, 6, -2, 2])
+    geodata.regions.append([2, 2, 0., 20.0, -0.1, 0.1, 0, 0.1])
+    #geodata.regions.append([1, 2, 0., 20.0, -2, 6, -2, 2])
+    #geodata.regions.append([2, 2, 0., 0.1, 0, 2., 0., 0.4])
+    
 
 
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t0, tf]
-    geodata.gauges.append([1,  1.83,  0.0,   0.0, 10e3])
-    geodata.gauges.append([2,  1.2446,0.635, 0.0, 10e3])
-    geodata.gauges.append([12, 0.0,   0.305, 0.0, 10e3])
-    geodata.gauges.append([13, 0.0,   0.61,  0.0, 10e3])
+    geodata.gauges.append([1,  x0,    0.001, 0.0, 10e3])
+    geodata.gauges.append([2,  1.469, 0.350, 0.0, 10e3])
+    geodata.gauges.append([3,  1.929, 0.001, 0.0, 10e3])
+    geodata.gauges.append([4,  1.929, 0.500, 0.0, 10e3])
+
     # == setfixedgrids.data values ==
     geodata.fixedgrids = []
     # for fixed grids append lines of the form

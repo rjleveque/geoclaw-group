@@ -30,8 +30,10 @@ FFLAGS ?=
 
 
 CLAW_SOURCES = \
+  dz_module.f90 \
   b4step2_geo.f \
   setprob_geo.f \
+  qinit_geo.f \
 
 
 # Clawpack libraries to be used:
@@ -42,7 +44,6 @@ CLAW_LIBSOURCES = \
   $(GEOLIB)/geoclaw_mod.f90 \
   $(GEOLIB)/topo_mod.f90 \
   $(GEOLIB)/dtopo_mod.f90 \
-  $(GEOLIB)/qinit_geo.f \
   $(GEOLIB)/readqinit_geo.f \
   $(GEOLIB)/movetopo_geo.f \
   $(GEOLIB)/cellgridintegrate_geo.f \

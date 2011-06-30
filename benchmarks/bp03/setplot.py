@@ -15,22 +15,47 @@ from pylab import loadtxt
 import matplotlib
 #matplotlib.rc('text', usetex=True)
 #import pdb
+import os
 
-gaugeData1 = loadtxt('Delta_0025_WaveGage_1.txt',skiprows=0)
-gaugeData2 = loadtxt('Delta_0025_WaveGage_2.txt',skiprows=0)
-gaugeData3 = loadtxt('Delta_0025_RunupGage_2.txt',skiprows=0)
-gaugeData4 = loadtxt('Delta_0025_RunupGage_3.txt',skiprows=0)
-gaugeTime = {}
-gaugeTime[1] = gaugeData1[:,0]
-gaugeTime[2] = gaugeData2[:,0]
-gaugeTime[12] = gaugeData3[:,0]
-gaugeTime[13] = gaugeData4[:,0]
-g = {}
-g[1] = gaugeData1[:,1]
-g[2] = gaugeData2[:,1]
-g[12] = gaugeData3[:,1]
-g[13] = gaugeData4[:,1]
+datadir = os.path.abspath('.')  # this directory
 
+d = None  # may be set in script that loops over test cases
+
+def read_lab_data(d=None):
+    if d==None:
+        probdata = Data(os.path.join(datadir,'setprob.data'))
+        d = probdata.d
+    
+    if d==0.061: fname = 'd61g1234-new.txt'
+    if d==0.080: fname = 'd80g1234-new.txt'
+    if d==0.100: fname = 'd100g124-new.txt'
+    if d==0.120: fname = 'd120g124-new.txt'
+    if d==0.140: fname = 'd140g1234-new.txt'
+    if d==0.149: fname = 'd149g124-new.txt'
+    if d==0.189: fname = 'd189g1234-new.txt'
+    
+    try:
+        print "Reading gauge data from ",fname
+    except:
+        print "*** No gauge data for d = ",d
+    
+    try:
+        fname = os.path.join(datadir,fname)
+        gaugedata = loadtxt(fname)
+    except:
+        raise Exception( "*** Cannot read file %s ",fname)
+    gauget = gaugedata[:,0]
+    gauge_ave = {}
+    for gaugeno in [1,2,3,4]:
+        try:
+            gauge_ave[gaugeno] = gaugedata[:,3*gaugeno] * 0.001
+        except:
+            gauge_ave[3] = None
+            gauge_ave[4] = gaugedata[:,9] * 0.001
+
+    return gauget, gauge_ave
+        
+    
 
 #--------------------------
 def setplot(plotdata):
@@ -64,20 +89,20 @@ def setplot(plotdata):
 
     figkwargs = dict(figsize=(18,9),dpi=800)
     #-----------------------------------------
-    # Figure for pcolor plot
+    # Figure for imshow plot
     #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='pcolor', figno=0)
+    plotfigure = plotdata.new_plotfigure(name='imshow', figno=0)
     plotfigure.show = True
     #plotfigure.kwargs = figkwargs
     # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes('pcolor')
+    plotaxes = plotfigure.new_plotaxes('imshow')
     plotaxes.title = 'Case 1'
     plotaxes.scaled = True
 
     def addgauges(current_data,fnt=14):
         from pyclaw.plotters import gaugetools
         gaugetools.plot_gauge_locations(current_data.plotdata, \
-                gaugenos=[1,2], format_string='ko', add_labels=True,markersize=8,fontsize=fnt)
+                gaugenos='all', format_string='ko', add_labels=True,markersize=8,fontsize=fnt)
 
     def fixup(current_data):
         import pylab
@@ -96,46 +121,46 @@ def setplot(plotdata):
     plotaxes.afteraxes = fixup
 
     # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
     plotitem.show = True
     #plotitem.plot_var = geoplot.surface
     plotitem.plot_var = geoplot.surface_or_depth
-    plotitem.pcolor_cmap = geoplot.tsunami_colormap
-    plotitem.pcolor_cmin = -.1
-    plotitem.pcolor_cmax = .1
+    plotitem.imshow_cmap = geoplot.tsunami_colormap
+    plotitem.imshow_cmin = -.02
+    plotitem.imshow_cmax = .02
     plotitem.add_colorbar = True
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
 
     # Add contour lines of bathymetry:
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
+    #plotitem.show = False
     plotitem.plot_var = geoplot.topo
     from numpy import arange, linspace
-    plotitem.contour_levels = arange(-2.5, 1, .05)
+    plotitem.contour_levels = arange(-2.5, 1, .01)
     plotitem.amr_contour_colors = ['k']  # color on each level
     plotitem.kwargs = {'linestyles':'solid'}
     plotitem.amr_contour_show = [2]  # show contours only on finest level
     plotitem.gridlines_show = 0
     plotitem.gridedges_show = 0
-    plotitem.show = False
 
     # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
     plotitem.show = True
     plotitem.plot_var = geoplot.land
-    plotitem.pcolor_cmap = geoplot.land1_colormap
-    plotitem.pcolor_cmin = 0.0
-    plotitem.pcolor_cmax = 1.0
+    plotitem.imshow_cmap = geoplot.land1_colormap
+    plotitem.imshow_cmin = 0.0
+    plotitem.imshow_cmax = 1.0
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
     #dx2 = .04
     #dy2 = .08
 
-    plotaxes.xlimits = [-1.0,5.0]
+    plotaxes.xlimits = [-1.0,3.0]
 #    plotaxes.xlimits = [-1.0,2.0]
 
-    plotaxes.ylimits = [0,1.85]
+    plotaxes.ylimits = [0,1.]
 #    plotaxes.ylimits = [-1.,1.]
 
     #-----------------------------------------
@@ -183,19 +208,28 @@ def setplot(plotdata):
     #-----------------------------------------
     # Figures for gauges
     #-----------------------------------------
+
     plotfigure = plotdata.new_plotfigure(name='Surface & topo', figno=300, \
                     type='each_gauge')
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
-    plotaxes.xlimits = [0,10.0]
-    plotaxes.ylimits = [-0.7,0.7]
+    plotaxes.xlimits = [0,5.0]
+    #plotaxes.ylimits = [-0.03,0.03]
     plotaxes.title = 'Surface'
 
     # Plot surface as blue curve:
     plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
     plotitem.plot_var = 3
     plotitem.plotstyle = 'b-'
+
+    # Plot fine grid as red curve:
+    plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
+    plotitem.show = False
+    #plotitem.outdir = '_output_fine'
+    plotitem.plot_var = 3
+    plotitem.plotstyle = '-'
+    plotitem.color = 'r'
 
     # Plot topo as green curve:
     #plotitem = plotaxes.new_plotitem(plot_type='1d_plot')
@@ -224,8 +258,13 @@ def setplot(plotdata):
     def plot_labData(current_data):
         import pylab
         gaugeno = current_data.gaugeno
-        pylab.plot(gaugeTime[gaugeno],g[gaugeno],'k')
-        pylab.legend(('GeoClaw', 'Lab Data'), loc='upper right')
+        gauget, gauge_ave = read_lab_data(d)
+        try:
+            pylab.plot(gauget,gauge_ave[gaugeno],'k')
+            pylab.legend(('GeoClaw', 'Lab Data'), loc='lower right')
+            #pylab.legend(('GeoClaw coarse', 'GeoClaw fine', 'Lab Data'), loc='lower right')
+        except:
+            print "No data for gauge ",gaugeno
         #gaugeTime
     plotaxes.afteraxes = plot_labData
 
@@ -242,9 +281,9 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    plotdata.print_framenos = [0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30] #'all'        # list of frames to print
+    plotdata.print_framenos = [0]             # list of frames to print
     plotdata.print_gaugenos = 'all'        # list of gauges to print
-    plotdata.print_fignos = 'all'            # list of figures to print
+    plotdata.print_fignos = [300]            # list of figures to print
     plotdata.html = True                     # create html files of plots?
     plotdata.html_homelink = '../README.html'   # pointer for top of index
     plotdata.latex = False                    # create latex file of plots?
