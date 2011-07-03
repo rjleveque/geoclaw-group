@@ -18,6 +18,7 @@ c=========================================================================
 
       ! Set dz_module variables:
 
+      dxfine = 1.d0  ! will be set properly in qinit
 
       ! initial depth of mass:
       iunit = 7
