@@ -2,7 +2,8 @@
 \subsection{BP 7:
  Monai valley beach (Laboratory)}
 
-{\bf Documentation:}  PMEL-135, pp 6 \& 45-46.
+{\bf Documentation:}  PMEL-135, pp 6 \& 45-46
+\cite{SynolakisBernard:pmel135}.
 
 \subsubsection{Problems encountered}
 
@@ -39,27 +40,29 @@ the ghost cell.
 at left boundary, so reflected waves exit.  
 (Note that the wave tank was much longer than computational domain specified.)
 \item We solved on $423\times 243$ grid (same as bathymetry)
-\item We also solved on $160\times 100$ grid (coarser grid, 
-not aligned with bathymetry) for comparison.
+\item We also solved on $211\times 121$ grid (half the resolution)
+for comparison.
 \end{itemize} 
+
+%\subsubsection{Sample results}
 
 \subsubsection{Gauge comparisons}
 
-See \Fig{bp7gauges}.
+See \Fig{bp7gauges}.  The gauges agree very well with the laboratory
+measurements, both for the full resolution and for the half-resolution run.
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0005fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0005fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0005fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0007fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0007fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0007fig300.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp7/figs423/gauge0009fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp7/figs160/gauge0009fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp7/figs211/gauge0009fig300.png}\hfil
 \caption{\label{fig:bp7gauges} 
 Left column: on $423\times 243$ grid (same as given bathymetry).
-Right column: $160\times 100$ grid (coarser and not aligned with
-bathymetry).
+Right column: $211\times 121$ grid.
   }
 \end{figure}
 
@@ -124,7 +127,7 @@ Right column: Zoomed view of computation.
 \end{figure}
 
 
-\subsection{Lessons learned}
+\subsubsection{Lessons learned}
 
 \begin{itemize}
 \item This problem has data that is fairly well specified, and has wave tank

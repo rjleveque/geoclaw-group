@@ -4,6 +4,7 @@
  Solitary wave on composite beach (Analytic)}
 
 {\bf Documentation:}  PMEL-135, pp 5 \& 30-33
+\cite{SynolakisBernard:pmel135}.
 
 \subsubsection{Problems encountered}
 
@@ -16,12 +17,14 @@
 
 \begin{itemize}
 \item Used $g=1$ and no friction.
-\item The bathymetry consists of a deep plateau of constant depth $d$ connected to a sloping beach of angle $\beta = arccot(19.85)$. Note that the toe of the beach is located at $x = X_0 = d cot \beta$
+\item The bathymetry consists of a deep plateau of constant depth $d$
+connected to a sloping beach of angle $\beta = \text{arccot}(19.85)$. 
+Note that the toe of the beach is located at $x = X_0 = d \cot \beta$
 \item The initial waveform of the wave is given by 
 \begin{equation}
-\eta(x,0) = H sech^2(\gamma (x - X_1)/d)
+\eta(x,0) = H \text{sech}^2(\gamma (x - X_1)/d)
 \end{equation}
-where $L = arccosh(sqrt(20))/\gamma$, $X_1 = X_0 + L$, and $\gamma = sqrt(3H/4d)$. The speed of the wave is given by the following: 
+where $L = \text{arccosh}(\sqrt(20))/\gamma$, $X_1 = X_0 + L$, and $\gamma = \sqrt(3H/4d)$. The speed of the wave is given by the following: 
 \begin{equation}
 u(x,0)=-\sqrt{g/d}\eta(x,0)
 \end{equation}
@@ -57,6 +60,11 @@ Frames of runup for low amplitude case. Top frame: Full view of incoming wave. B
 Frames of runup for high amplitude case. Top frame: Full view of incoming wave. Bottom Frame: Zoomed view of inundation area.}
 \end{figure}
 
-\subsection{Lessons learned}
+\subsubsection{Lessons learned}
 
-\todo{This problem was a good physical verification of the framework developed in BP01. The low amplitude case had, as expected, a high degree of concurence with the predicted model. The higher amplitude case had a much lower degree of concurrence. This may be due to the steep shock that forms, requiring more complicated numerical modeling than that provided by the shallow water wave equations.}
+This problem was a good physical verification of the framework
+developed in BP01. The low amplitude case had, as expected, a high
+degree of concurence with the predicted model. The higher amplitude
+case had a much lower degree of concurrence. This may be due to the
+steep shock that forms, requiring more complicated numerical modeling
+than that provided by the shallow water wave equations.
