@@ -20,24 +20,31 @@ import os
 datadir = os.path.abspath('.')  # this directory
 
 d = None  # may be set in script that loops over test cases
+my = None # may be set in script that loops over test cases
 
-def read_lab_data(d=None):
-    if d==None:
+
+print "d = ",d,"   my = ",my
+
+
+def read_lab_data(d_param=None):
+    #import pdb; pdb.set_trace()
+    if d_param==None:
         probdata = Data(os.path.join(datadir,'setprob.data'))
-        d = probdata.d
+        d_param = probdata.d
     
-    if d==0.061: fname = 'd61g1234-new.txt'
-    if d==0.080: fname = 'd80g1234-new.txt'
-    if d==0.100: fname = 'd100g124-new.txt'
-    if d==0.120: fname = 'd120g124-new.txt'
-    if d==0.140: fname = 'd140g1234-new.txt'
-    if d==0.149: fname = 'd149g124-new.txt'
-    if d==0.189: fname = 'd189g1234-new.txt'
+    print '+++ d_param = ',d_param
+    if d_param==0.061: fname = 'd61g1234-new.txt'
+    if d_param==0.080: fname = 'd80g1234-new.txt'
+    if d_param==0.100: fname = 'd100g124-new.txt'
+    if d_param==0.120: fname = 'd120g124-new.txt'
+    if d_param==0.140: fname = 'd140g1234-new.txt'
+    if d_param==0.149: fname = 'd149g124-new.txt'
+    if d_param==0.189: fname = 'd189g1234-new.txt'
     
     try:
         print "Reading gauge data from ",fname
     except:
-        print "*** No gauge data for d = ",d
+        print "*** No gauge data for d_param = ",d_param
     
     try:
         fname = os.path.join(datadir,fname)
@@ -50,10 +57,16 @@ def read_lab_data(d=None):
         try:
             gauge_ave[gaugeno] = gaugedata[:,3*gaugeno] * 0.001
         except:
+            # If fails for gaugeno==4 then it is gauge 3 that's missing:
             gauge_ave[3] = None
-            gauge_ave[4] = gaugedata[:,9] * 0.001
+            #import pdb; pdb.set_trace()
+            try:
+                gauge_ave[4] = gaugedata[:,9] * 0.001
+            except:
+                gauge_ave[2] = gaugedata[:,4] * 0.001
+                gauge_ave[4] = gaugedata[:,5] * 0.001
 
-    return gauget, gauge_ave
+    return d_param, gauget, gauge_ave
         
     
 
@@ -73,6 +86,12 @@ def setplot(plotdata):
     from numpy import linspace
 
     plotdata.clearfigures()  # clear any old figures,axes,items data
+    probdata = Data(os.path.join(datadir,'setprob.data'))
+    d = probdata.d
+    clawdata = Data(os.path.join(datadir,'amr2ez.data'))
+    my = clawdata.my
+    print "+++ in setplot d = ",d
+    print "+++ in setplot my = ",my
 
     def set_drytol(current_data):
         # The drytol parameter is used in masking land and water and
@@ -128,7 +147,7 @@ def setplot(plotdata):
     plotitem.imshow_cmap = geoplot.tsunami_colormap
     plotitem.imshow_cmin = -.02
     plotitem.imshow_cmax = .02
-    plotitem.add_colorbar = True
+    plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
 
@@ -158,10 +177,10 @@ def setplot(plotdata):
     #dy2 = .08
 
     plotaxes.xlimits = [-1.0,3.0]
-#    plotaxes.xlimits = [-1.0,2.0]
+#   plotaxes.xlimits = [-1.0,2.0]
 
     plotaxes.ylimits = [0,1.]
-#    plotaxes.ylimits = [-1.,1.]
+#   plotaxes.ylimits = [-1.,1.]
 
     #-----------------------------------------
     # Figure for line plot
@@ -258,7 +277,13 @@ def setplot(plotdata):
     def plot_labData(current_data):
         import pylab
         gaugeno = current_data.gaugeno
-        gauget, gauge_ave = read_lab_data(d)
+        try:
+            d_param = d
+            print "+++ d_param = ",d_param
+        except:
+            print "+++ d not set"
+            d_param = None
+        d, gauget, gauge_ave = read_lab_data(d_param)
         try:
             pylab.plot(gauget,gauge_ave[gaugeno],'k')
             pylab.legend(('GeoClaw', 'Lab Data'), loc='lower right')
@@ -266,6 +291,12 @@ def setplot(plotdata):
         except:
             print "No data for gauge ",gaugeno
         #gaugeTime
+
+        print "+++ for gauges, my = ",my
+        if my:
+            pylab.title("Gauge %s for d = %4.3f with my = %s" % (gaugeno,d,my))
+        else:
+            pylab.title("Gauge %s for d = %4.3f" % (gaugeno,d))
     plotaxes.afteraxes = plot_labData
 
     def add_tankdata(datafile):

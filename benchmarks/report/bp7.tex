@@ -67,23 +67,23 @@ bathymetry).
 
 \subsubsection{Frame comparisons}
 
-See \Fig{bp7framesA} and \Fig{bp7framesA} for comparisons of the Frames 10,
+See \Fig{bp7framesA} and \Fig{bp7framesB} for comparisons of the Frames 10,
 25, 40, 55, and 70 from the overhead movie with GeoClaw results at roughly
 corresponding times.  These results are from the $423\times 243$ grid (same
 as given bathymetry).
 
 The movie had a rate of 30 fps, so the frames are 0.5 seconds apart. However,
 it is not clear what the starting time was for Frame 1 relative to the
-simulation time.   In the Benchmark Description \cite{bp7description}, it is
+simulation time.   In the Benchmark Description \cite{bp-description}, it is
 stated that ``frame 10 approximately occurs at 15.3 seconds'', but then later
 ``it is recommend that each modeler find times of the snapshots that best fit
 the data''.   We found reasonably good agreement starting at 15 seconds for
 Frame 1 and then taking 0.5 second increments, as shown in \Fig{bp7framesA}
-and \Fig{bp7framesA}.
+and \Fig{bp7framesB}.
 
 The yellow dashed lines on the frames from the movie show the approximate
 shoreline (and were provided as part of the benchmark specification
-\cite{bp7description}).  The actual shoreline location is of course somewhat
+\cite{bp-description}).  The actual shoreline location is of course somewhat
 ambiguous in the movie, and also in the computation.  The figures of the
 GeoClaw computation show the shoreline two different ways:
 \begin{itemize}
@@ -126,9 +126,14 @@ Right column: Zoomed view of computation.
 
 \subsection{Lessons learned}
 
-\todo{Make any relevant comments or observation regarding the benchmark itself,
-the available data provided, the relevance of the benchmark to tsunami
-science in general and to validating your specific model in particular. 
-Report problems and make recommendations regarding improving the benchmark
-or its data, as appropriate.}
+\begin{itemize}
+\item This problem has data that is fairly well specified, and has wave tank
+geometry that scales up to a reasonable physical tsunami problem (since it
+was designed by scaling down a physical problem).  
 
+\item Solutions to the shallow water equations fit the data quite well, as
+found both in our experiments and by other modellers.  This gives a
+reassuring test of the validity of shallow water equations for real
+tsunamis.
+
+\end{itemize} 

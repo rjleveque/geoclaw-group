@@ -43,10 +43,10 @@ GEOLIB = $(CLAW)/geoclaw/2d/lib
 
 CLAW_LIBSOURCES = \
   $(GEOLIB)/geoclaw_mod.f90 \
-  $(GEOLIB)/setprob_geo.f \
-  $(GEOLIB)/bc2amr_geo.f \
   $(GEOLIB)/topo_mod.f90 \
   $(GEOLIB)/dtopo_mod.f90 \
+  $(GEOLIB)/setprob_geo.f \
+  $(GEOLIB)/bc2amr_geo.f \
   $(GEOLIB)/readqinit_geo.f \
   $(GEOLIB)/movetopo_geo.f \
   $(GEOLIB)/cellgridintegrate_geo.f \

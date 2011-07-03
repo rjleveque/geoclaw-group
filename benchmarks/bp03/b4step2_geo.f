@@ -59,6 +59,10 @@ c     # Many parameters and variables below are set in dz_module.
       xic = xi0 + s
       !write(26,*) "+++ t = ",t,"  xc = ",xic
       xc = xic*costh
+
+      ! account for the fact that mass stops when it hits horiz. bottom:
+      xc = dmin1(xc, 1.5d0/tanth - xlength)  
+
       tol = 1.d-6      ! tolerance for zeroin
       
       do j=1-mbc,my+mbc
