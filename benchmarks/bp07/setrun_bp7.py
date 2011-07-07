@@ -303,13 +303,13 @@ def setgeo(rundata):
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     #geodata.gauges.append([11, 0.1, 1.5, 0., 1.e10])
-    geodata.gauges.append([0, 0.2, 2.7, 0., 1.e10])
+    #geodata.gauges.append([0, 0.2, 2.7, 0., 1.e10])
     geodata.gauges.append([5, 4.521, 1.196, 0., 1.e10])
     geodata.gauges.append([7, 4.521, 1.696, 0., 1.e10])
     geodata.gauges.append([9, 4.521, 2.196, 0., 1.e10])
-    geodata.gauges.append([101, 5.1575, 1.88, 0., 1.e10])
-    geodata.gauges.append([102, 5.0300, 2.2062, 0., 1.e10])
-    geodata.gauges.append([103, 4.9975, 2.32, 0., 1.e10])
+    #geodata.gauges.append([101, 5.1575, 1.88, 0., 1.e10])
+    #geodata.gauges.append([102, 5.0300, 2.2062, 0., 1.e10])
+    #geodata.gauges.append([103, 4.9975, 2.32, 0., 1.e10])
 
 
     # == setfixedgrids.data values ==

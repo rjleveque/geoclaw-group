@@ -47,19 +47,21 @@ def setplot(plotdata):
     def addgauges(current_data):
         from pyclaw.plotters import gaugetools
         gaugetools.plot_gauge_locations(current_data.plotdata, \
-             gaugenos='all', format_string='ko', add_labels=True)
+             gaugenos=[5,7,9], format_string='ko', add_labels=True)
     
 
     #-----------------------------------------
     # Figure for imshow plot
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='imshow', figno=0)
-    plotfigure.show = False
+    plotfigure.show = True
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('imshow')
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
+    plotaxes.xlimits = [0,5.488]
+    plotaxes.ylimits = [0,3.4]
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
@@ -68,7 +70,7 @@ def setplot(plotdata):
     plotitem.imshow_cmap = geoplot.tsunami_colormap
     plotitem.imshow_cmin = -0.02
     plotitem.imshow_cmax = 0.02
-    plotitem.add_colorbar = True
+    plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.amr_gridedges_show = [1]
 
@@ -92,10 +94,13 @@ def setplot(plotdata):
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('imshow')
+    plotaxes.show = False
     plotaxes.axescmd = "axes([.1,.5,.8,.4])"
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
     plotaxes.afteraxes = addgauges
+    plotaxes.xlimits = [0,5.488]
+    plotaxes.ylimits = [0,3.4]
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
@@ -104,7 +109,7 @@ def setplot(plotdata):
     plotitem.imshow_cmap = geoplot.tsunami_colormap
     plotitem.imshow_cmin = -0.03
     plotitem.imshow_cmax = 0.03
-    plotitem.add_colorbar = True
+    plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.amr_gridedges_show = [1]
 

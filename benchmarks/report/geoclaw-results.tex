@@ -26,8 +26,8 @@
 
 
 % indicate which bp*.tex files to include: (comment out to include all)
-\includeonly{bp6}
 
+\includeonly{bp6}
 
 \begin{document}
 
@@ -44,7 +44,9 @@ Version of \today}
 
 \vskip 15pt
 \noindent
-{\bf Team:}  GeoClaw Tsunami Modeling Group, University of Washington.\\
+{\large\bf Team:}  GeoClaw Tsunami Modeling Group, University of Washington.\\
+\vskip 5pt
+\noindent
 This benchmarking work was performed by 
 Paul Chamberlain,
 David L. George (USGS),
@@ -53,227 +55,9 @@ Bryant Hirai,
 Randall J. LeVeque, and
 Jonathan Varkovitzky.
 
-\vskip 5pt
-\noindent
-{\bf Geographic area:}  The west coast, with a focus on Washington State,
-including Puget Sound, the San Juan Island group, and other islands in the
-Strait of Juan de Fuca.
-\todo{Should we mention California?  Oregon, Alaska, Hawaii?}
+\tableofcontents
 
-\vskip 5pt
-\section{Introduction}
-
-\todo{
-(Describe your NTHMP funded effort regarding inundation mapping, i.e., which
-area this covers, which types of tsunami sources are affecting your area and
-hence which benchmark problems in the list you will be addressing and why.)
-}
-
-No current or past support from NTHMP.
-Funding is expected from NTHMP partner FEMA’s Risk Mapping, Assessment, and
-Planning (Risk MAP) Program, as part of the BakerAECOM coastal engineering
-effort for the FEMA California Coastal Analysis and Mapping (CCAMP) Project.
-Funding will also be sought to provide Washington State with tsunami
-modeling and mapping in support of tsunami hazard assessment and emergency
-management planning and education.  
-
-Tsunami sources in these geographic
-areas include earthquakes and landslides, and we will therefore address
-benchmark problems that deal with these sources.
-
-\section{Model description}
-\todo{
-(Describe and give relevant references to the model(s) you are using for
-your tsunami source, propagation, and coastal impact/inundation simulations.
-As a minimum, provide general information on the type of models you are
-using, including related restriction/assumptions. Refer to (preferably peer
-reviewed) papers where your model equations and other relevant validation
-and/or case studies for tsunami or otherwise have been published.)
-}
-
-
-GeoClaw is a variant of the Clawpack open source
-software \cite{claw.org} that LeVeque and collaborators have
-been developing since 1994.  The ``wave-propagation algorithms'' used in
-this software are described in great detail in the textbook
-\cite{rjl:fvmhp} and in several journal publications
-\cite{rjl:advect,rjl:waveprop,jol-rjl:3d}.
-
-
-Adaptive mesh refinement (AMR) has been
-incorporated since the inception of this software, 
-in joint work with Marsha Berger at the
-Courant Institute of Mathematical Sciences, one of the foremost authorities
-on block structured AMR technology, often referred to as
-Berger-Colella-Oliger style AMR \cite{berger-colella, berger-oliger}.  The
-AMR algorithms in Clawpack are described in detail in
-\cite{mjb-rjl:amrclaw}.  
-Berger has also played a significant role in adapting the AMR routines to
-work well in GeoClaw \cite{BergerGeorgeLeVequeMandli:awr11,
-LeVequeGeorgeBerger:an11} in connection with well-balancing and inundation
-modeling.
-
-The GeoClaw software is described in some detail in
-\cite{BergerGeorgeLeVequeMandli:awr11}, an invited contribution to a special
-issue of
-{\it Advances in Water Resources} on
-``New Computational Methods and Software Tools'',
-and in \cite{LeVequeGeorgeBerger:an11}, an invited paper in {\it Acta
-Numerica}, a sort of ``annual review of numerical analysis''.
-There is also 
-on-line documentation \cite{geoclaw-doc} that is part of the extensive
-documentation of Clawpack.
-The Riemann solvers and inundation model are desribed in more detail in
-\cite{dgeorge:phd,George2008}
-
-The open source Clawpack software (including GeoClaw) can be freely
-downloaded from the website \url{http://www.clawpack.org}.  
-Recent developments have taken
-place using a Subversion repository that is openly accessible (linnked from
-the Clawpack webpage), using issue tracking and a wiki, as well as the {\tt
-claw-dev} google group to discuss development issues.  Clawpack is currently
-transitioning to use of the Git, a more modern distributed version control
-system, and the future home of Clawpack is on Github
-(\url{https://github.com/organizations/clawpack}).
-
-GeoClaw was initiated in the PhD work of David George
-\cite{dgeorge:phd,rjl-george:catalina04a,dg-rjl:tsunami06,George2008} and
-was originally called TsunamiClaw.  It has more recently been extended to
-handle other geophysical flows such as storm surge \cite{mandli:phd}
-dam break problems \cite{George:Malpasset}, and debris flows
-\cite{GeorgeIverson2011}.
-
-The GeoClaw model solves the two-dimensional nonlinear shallow water equations 
-using high-resolution finite volume methods.  Values of $h$, $hu$, and $hv$
-in each grid cell represent cell averages of the depth and momentum
-components.  With flat bathymetry, the methods are exactly conservative for
-both mass and momentum, and conserve mass for arbitrary bathymetry when used
-on a fixed grid. They do not exactly conserve mass during regridding when
-AMR is used because, for example, a grid cell that is dry on a coarse grid
-may contain part of the shoreline on a finer grid.  This is not an issue as
-long as the region of interest is refined before the main wave arrives.
-
-
-These methods are based on Godunov's method, which means that at each cell
-interface a one-dimensional Riemann problem is solved normal to the edge,
-which reduces to a one-dimensional shallow water model with piecewise
-constant initial data,
-with left and right values given by the cell averages on each side.
-The jump in bathymetry between the cells is incorporated into the Riemann
-solution in a manner that makes the method ``well balanced'': the steady
-state of the ocean at rest is exactly maintained.  This is done using the
-``f-wave formulation'' of the wave propagation method, as discussed in
-\cite{BaleLeVequeEtAl2002,George2008,rjl:fvmhp,rjl:wbfwave10}.
-
-
-Godunov's method consists of solving the Riemann problem and using the
-resulting wave structure to update cell averages in the adjacent finite
-volume cells.  In practice an approximate Riemann solution is used, which
-reduces to the standard Roe solver \cite{rjl:fvmhp,roe:rs}
-in f-wave form in general, but is modified
-to also handle dry states in order to model inundation \cite{George2008}.
-
-Accuracy is improved by adding in high-resolution correction terms.  These
-terms are based on Taylor series approximation of the exact solution at time
-$t_{n+1}$ about time $t_n$, using the same approach as used to derive the
-classical second-order accurate Lax-Wendroff  method \cite{rjl:fdm}.
-However, the terms are only added where the solution is smooth.  Near steep
-gradients, these terms lead to severe numerical dispersion and potentially
-undershoots or overshoots that can lead to instability or unphysical states
-(e.g. negative fluid depth).  A limiter is applied to the correction term
-using the standard approach described in detail in 
-\cite{rjl:fvmhp} and references found there, based on the theory of total
-variation diminishing (TVD) methods that has been well developed since the
-early 1980s.  The resulting ``high-resolution'' shock-capturing 
-methods exhibit minimal numerical dispersion or dissipation and have been
-shown to be very robust for both linear and nonlinear hyperbolic problems, 
-even when the solution contains strong shock waves.
-
-\subsection{Other validation studies}
-
-Several of the benchmark problems were solved using TsunamiClaw, an early
-version of GeoClaw, in preparation for the Catalina
-benchmarking workshop in 2004.  These results are available in the
-proceedings paper \cite{rjl-george:catalina04a}.
-
-Validation studies of the more 
-recent GeoClaw software have been presented in several
-peer-reviewed papers:
-
-\begin{itemize}
-\item In \cite{BergerGeorgeLeVequeMandli:awr11} a test problem is used that
-consists of a radially symmetric ocean with a continental shelf, and
-a radially symmetric initial
-hump of water at the center.  At one position along the coast a 
-island is placed on the shelf.  Several gauges are located near the island.
-If the island is rotated to a different position on the coast the results at
-the gauges should be identical.  Numerically they will not be identical due
-to differences in how the coast intersects the Cartesian grid.  Very similar
-results are obtained for locations near an axis and near the diagonal, both
-in gauge results and in plots of the surface and inundation.  This is true
-even when AMR is used to concentrate fine grids only in the direction
-towards the island.  In this paper the Chile 2010 tsunami is also used as a
-test problem and good agreement with measured results at DART Buoy 32412
-are obtained, on two different grid resolutions to test convergence.
-See also 
-\url{http://kingkong.amath.washington.edu/clawpack/links/awr11/}
-for codes and animations.
-
-
-\item Further tests of this same problems are presented in
-\cite{LeVequeGeorgeBerger:an11}.  
-See also 
-\url{http://kingkong.amath.washington.edu/clawpack/links/an11/}
-for codes and animations.
-
-\item Grid refinement studies and comparison with field data for the widely
-studied Malpasset dam failure are presented in \cite{George:Malpasset}.
-
-\item In \cite{mjb-dac-ch-rjl:amrsphere09} tests are performed for a
-tsunami-like wave propagating on the full sphere, using a novel mapped grid
-that covers the sphere with a logically rectangular finite volume grid.
-Tests are presented in which the bathymetry and the initial conditions are
-axisymmetric so that the solution should remain so and can be compared to
-fine grid one-dimensional simulations.  
-See also 
-\url{http://www.amath.washington.edu/~rjl/pubs/amrsphere09/index.html}
-for codes used in this paper.
-\end{itemize} 
-
-
-Independent validation of GeoClaw has also been performed by Spatial Vision
-Group (\url{http://www.spatialvisiongroup.com/}), a private consulting
-company in Vancouver, BC. David Alexander and Bill Johnstone from this group
-used the  TsunamiClaw software to perform hazard
-studies of the communities of Ucluelet and Tofino on Vancouver Island.  As
-part of their validation, they compared  TsunamiClaw results to those obtained
-using MOST for a standard model of a Magnitude 9.0 
-Cascadia Subduction Zone event.  Comparisons were performed for several tide
-gauges on the coast of Washington and Oregon.
-
-Our group is currently using GeoClaw to model the Great Tohoku Tsunami of 11
-March 2011 and preliminary comparisons with DART buoy data looks very good.
-Some results were posted online as computed in the days after the event and
-can be viewed at
-\url{http://kingkong.amath.washington.edu/clawpack/links/honshu2011/}.
-Some comparisons were also presented in a recent article in SIAM News on tsunami
-modeling \cite{siamnews-tsunami}.  Preliminary results have also been
-obtained by other groups, e.g. \cite{ZhangYuenEtal:2011}.
-
-
-\section{Benchmark results}
-\todo{(For each selected (PMEL) benchmark problem, please document how you defined
-your model input data, grid and various other parameters to simulate each
-problem. 
-
-Provide results as figures (and raw data) following future formatting
-instructions, to the relevant site and/or coordinator. Also summarize your
-results as simple error indicators of the performance of the model (e.g.,
-mean, max, rms errors).)}
-
-In the sections below,
-PMEL-135 refers to \cite{SynolakisBernard:pmel135}.
-
+\include{intro}
 \include{bp1}
 \include{bp2}
 \include{bp3}
@@ -281,11 +65,10 @@ PMEL-135 refers to \cite{SynolakisBernard:pmel135}.
 \include{bp5}
 \include{bp6}
 \include{bp7}
-\include{bp8}
+\include{bp8a}
 \include{bp9}
 \include{bp10}
 \include{bp11}
-\include{bp12}
 
 
 \bibliographystyle{plain}
