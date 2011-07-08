@@ -12,27 +12,7 @@ from pyclaw.data import Data
 import pylab
 import glob
 
-if 0:
-    dartdata = {}
-    for gaugeno in [21401, 21413, 21414, 21415,  21418, 21419, 51407, 52402]:
-        files = glob.glob('../../DART/%s*_notide.txt' % gaugeno)
-        if len(files) != 1:
-            raise Exception("*** found %s files for gauge number %s" \
-                       % (len(files),gaugeno)   )
-        fname = files[0]
-        dartdata[gaugeno] = pylab.loadtxt(fname)
-
-    tlimits = {}
-    tlimits[21401] = [0,28800]
-    tlimits[21413] = [0,28800]
-    tlimits[21414] = [8000,28800]
-    tlimits[21415] = [7200,28800]
-    tlimits[21416] = [0,14400]
-    tlimits[21418] = [0,28800]
-    tlimits[21419] = [0,28800]
-    tlimits[51407] = [8000,28800]
-    tlimits[52402] = [8000,28800]
-
+Esashidata = pylab.loadtxt('Esashi.txt', skiprows=1)
 #--------------------------
 def setplot(plotdata):
 #--------------------------
@@ -79,10 +59,10 @@ def setplot(plotdata):
         pylab.yticks(fontsize=15)
         #pylab.plot([205],[20],'wo',markersize=5)
         #pylab.text(201,22,'Hawaii',color='w',fontsize=15)
-        pylab.plot([139.7],[35.6],'wo',markersize=5)
-        pylab.text(135.2,35.9,'Tokyo',color='w',fontsize=15)
-        pylab.plot([235.81],[41.75],'wo',markersize=5)
-        pylab.text(235.9,42,'Crescent City',color='w',fontsize=15)
+        # pylab.plot([139.7],[35.6],'wo',markersize=5)
+        # pylab.text(135.2,35.9,'Tokyo',color='w',fontsize=15)
+        # pylab.plot([235.81],[41.75],'wo',markersize=5)
+        # pylab.text(235.9,42,'Crescent City',color='w',fontsize=15)
         #addgauges(current_data)
 
     plotaxes.afteraxes = fixup
@@ -126,15 +106,19 @@ def setplot(plotdata):
     # Figure for zoom plot  
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Zoom', figno=1)
-    plotfigure.show = False
+    plotfigure.show = True
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
     ## 
-    plotaxes.xlimits = [235.6,235.9] ## CC 1-sec grid area = 235.766-235.857, 41.717-41.783
-    plotaxes.ylimits = [41.6,41.9]   ## CC 1-sec grid area = 235.766-235.857, 41.717-41.783
+    # plotaxes.xlimits = [140.3, 140.5] ## Esashi Tide Gage
+    # plotaxes.ylimits = [41.75, 41.95] ## Esashi Tide Gage
+    plotaxes.xlimits = [139.4, 139.6] ## Okushiri Island
+    plotaxes.ylimits = [42.0, 42.25] ## Okushiri Island
+    # plotaxes.xlimits = [235.6,235.9] ## CC 1-sec grid area = 235.766-235.857, 41.717-41.783
+    # plotaxes.ylimits = [41.6,41.9]   ## CC 1-sec grid area = 235.766-235.857, 41.717-41.783
 #    plotaxes.xlimits = [235.,236.] ## 6-sec grid extent
 #    plotaxes.ylimits = [40.,43.]   ## 6-sec grid extent
 
@@ -222,23 +206,22 @@ def setplot(plotdata):
         n = floor(t.max()/3600.) + 2
         xticks([3600*i for i in range(n)])
 
-    def plot_dart(current_data):
+    def plot_TG(current_data):
         import pylab
         gaugeno = current_data.gaugeno
         try:
-            dart = dartdata[gaugeno]
-            pylab.plot(dart[:,0],dart[:,1],'k')
-            pylab.legend(['GeoClaw','DART data'])
+            pylab.plot(Esashidata[:,0],Esashidata[:,1],'k')
+            pylab.legend(['GeoClaw','Esashi data'])
         except:
             pylab.legend(['GeoClaw'])
         add_zeroline(current_data)
-        try:
-            pylab.xlim(tlimits[gaugeno])
-        except:
-            pass
+#         try:
+#             pylab.xlim(tlimits[gaugeno])
+#         except:
+#            pass
 
 
-    #plotaxes.afteraxes = plot_dart
+    plotaxes.afteraxes = plot_TG
 
 
 
@@ -249,11 +232,11 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    plotdata.print_framenos = 'all'          # list of frames to print
+    plotdata.print_framenos = [1]            # list of frames to print
 ##    plotdata.print_framenos = range(54,97) # list of frames to print (n1,n2): from n1 to n2-1 
 ##    plotdata.print_framenos = [53]         # list of frames to print
     plotdata.print_gaugenos = 'all'          # list of gauges to print
-    plotdata.print_fignos = 'all'            # list of figures to print
+    plotdata.print_fignos = 'all'          # list of figures to print
     plotdata.html = True                     # create html files of plots?
     plotdata.html_homelink = '../README.html'   # pointer for top of index
     plotdata.latex = True                    # create latex file of plots?

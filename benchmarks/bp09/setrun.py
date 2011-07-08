@@ -63,10 +63,10 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.ndim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.xlower = 137.6  ##
+    clawdata.xlower = 137.5  ##
     clawdata.xupper = 141.5  ##
 
-    clawdata.ylower = 39.6  ##
+    clawdata.ylower = 39.5  ##
     clawdata.yupper = 44.2  ##
 
 
@@ -109,8 +109,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout =  10##
-        clawdata.tfinal = 600 ##
+        clawdata.nout =  2##
+        clawdata.tfinal = 10##
 #        clawdata.nout =  1##
 #        clawdata.tfinal = 1##
         
@@ -303,7 +303,13 @@ def setgeo(rundata):
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
         okushiri_dir + '/OK08.tt1'])  ## Dmitry N.'s version of Kansai U.
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24.tt1'])  ## Dmitry N.'s version of Kansai U.
+        okushiri_dir + '/OK24T.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK24R.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK24B.tt1'])  ## Dmitry N.'s version of Kansai U.
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/OK24L.tt1'])  ## Dmitry N.'s version of Kansai U.
         
     #geodata.topofiles = [[1, 1, 1, 0, 1.e10,'testbathy.tt1']]
     
@@ -353,8 +359,34 @@ def setgeo(rundata):
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
-    
-    geodata.gauges.append([1, 140.133, 41.867, 0.0, 1.e10]) ## Esashi Tide Gage
+    geodata.gauges.append([1,139.42921171029800,42.18818149181100,0.0,1e10])##RunupStation
+    geodata.gauges.append([2,139.42921171029800,42.18818149181100,0.0,1e11])##RunupStation
+    geodata.gauges.append([3,139.41118568602300,42.16276286903440,0.0,1e12])##RunupStation
+    geodata.gauges.append([4,139.41118568602300,42.16276286903440,0.0,1e13])##RunupStation
+    geodata.gauges.append([5,139.41826120640900,42.13740439344160,0.0,1e14])##RunupStation
+    geodata.gauges.append([6,139.42803576614900,42.09301238448060,0.0,1e15])##RunupStation
+    geodata.gauges.append([7,139.42624499866200,42.11655478529630,0.0,1e16])##RunupStation
+    geodata.gauges.append([8,139.42371474465000,42.10041414521010,0.0,1e17])##RunupStation
+    geodata.gauges.append([9,139.42890180361700,42.07663658213730,0.0,1e18])##RunupStation
+    geodata.gauges.append([10,139.42785342193500,42.06546151943780,0.0,1e19])##RunupStation
+    geodata.gauges.append([11,139.45153985259400,42.04469654705770,0.0,1e20])##RunupStation
+    geodata.gauges.append([12,139.45652844349600,42.05169226235270,0.0,1e21])##RunupStation
+    geodata.gauges.append([13,139.45652844349600,42.05169226235270,0.0,1e22])##RunupStation
+    geodata.gauges.append([14,139.47201375059200,42.05808988043260,0.0,1e23])##RunupStation
+    geodata.gauges.append([15,139.47201375059200,42.05808988043260,0.0,1e24])##RunupStation
+    geodata.gauges.append([16,139.51504609512900,42.21524908632280,0.0,1e25])##RunupStation
+    geodata.gauges.append([17,139.51504609512900,42.21524908632280,0.0,1e26])##RunupStation
+    geodata.gauges.append([18,139.55454937977200,42.22698164310980,0.0,1e27])##RunupStation
+    geodata.gauges.append([19,139.55454937977200,42.22698164310980,0.0,1e28])##RunupStation
+    geodata.gauges.append([20,139.49343073436600,42.06450127636460,0.0,1e29])##RunupStation
+    geodata.gauges.append([21,139.54745985068800,42.18744878866870,0.0,1e30])##RunupStation
+    geodata.gauges.append([22,139.52589824834300,42.17101221066980,0.0,1e31])##RunupStation
+    geodata.gauges.append([23,139.56252422319000,42.21198368758800,0.0,1e32])##RunupStation
+    geodata.gauges.append([24,139.51909972950900,42.11305804585320,0.0,1e33])##RunupStation
+    geodata.gauges.append([25,139.52107657810300,42.15137634939950,0.0,1e34])##RunupStation
+    geodata.gauges.append([26,139.52107657810300,42.15137634939950,0.0,1e35])##RunupStation
+    geodata.gauges.append([101,140.51750000000000,42.98417000000000,0.0,1e36])##IwanaiTG
+    geodata.gauges.append([102,140.13500000000000,41.86780000000000,0.0,1e37])##EsashiTG
     
     ## The next part set up ngauges gauges along a transect between (x1,y1) and (x2,y2):
     # from numpy import linspace
