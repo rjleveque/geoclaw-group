@@ -4,7 +4,10 @@
 {\bf Documentation:}
 \begin {itemize}
 
-\item \cite{bp-description}
+\item Problem description provided by Frank Gonz\'alez 
+ at \cite{bp-description}:\\
+\href{https://github.com/rjleveque/nthmp-benchmark-problems/blob/master/BP06-FrankG-Solitary_wave_on_a_conical_island/Description.pdf}
+{BP06-FrankG-Solitary\_wave\_on\_a\_conical\_island/Description.pdf} 
 \item \url{http://chl.erdc.usace.army.mil/chl.aspx?p=s&a=Projects;35}
 \item PMEL-135, pp 6 \& 39-45 \cite{SynolakisBernard:pmel135}.
 \item Other reference, below
@@ -21,7 +24,7 @@
 
 \begin{itemize}
 \item Used $g=9.81$ and no friction.
-\item Used the computational domain presented in \Fig{bp6/Domain.pdf}, developed after personal communication with Michael Briggs, U.S. Army Corps of Engineers, who  provided additional information on physical details of the laboratory experiment.
+\item Used the computational domain presented in \Fig{bp6Domain}, developed after personal communication with Michael Briggs, U.S. Army Corps of Engineers, who  provided additional information on physical details of the laboratory experiment.
 \item Used open boundary conditions for the top, bottom and right walls, and for the gaps between the ends of the wavemaker and the top and bottom walls.
 \item Used boundary conditions for the face of the wavemaker at the left wall corresponding to the ...  
 \item Simulated Cases A and C, each with three different grid sizes and resolution, to demonstrate convergence:  61 X 47 (50 cm), 121 X 93 (25 cm) and 241 X 185 (12.5 cm)
@@ -29,6 +32,12 @@
 
 \subsubsection{Results}
 
+\begin{figure}[ht]
+\hfil\includegraphics[width=5.8in]{bp6/Domain.pdf}\hfil
+\caption{\label{bp6Domain}
+Domain and location of gages.
+}
+\end{figure}
 
 {\bf References:}
 \begin {itemize}
@@ -41,8 +50,5 @@
 \item Yeh, H., P. Liu, M. Briggs, C. Synolakis, (1994): Propagation and amplification of tsunamis at coastal boundaries, Nature 372, 353-355.
 \end{itemize}
 
-\begin{figure}[ht]
-\hfil\includegraphics[width=1.5in]{bp6/Domain.pdf}\hfil
-\end{figure}
 
 \todo{Move these to references.bib}

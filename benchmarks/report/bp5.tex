@@ -8,9 +8,18 @@
 
 \begin{itemize}
 \item PMEL-135, pp 6 \& 37-39.
-\item Problem description provided by Dmitry **CITE**
+
+\item Problem description provided by Elena Tolkova at
+\cite{bp-description}:\\
+\href{https://github.com/rjleveque/nthmp-benchmark-problems/blob/master/BP05-ElenaT-Solitary_wave_on_composite_beach_laboratory/BP5_description.pdf}
+{BP05-ElenaT-Solitary\_wave\_on\_composite\_beach\_laboratory/BP5\_description.pdf} 
+
 \item Coastal Hydraulics Laboratory Problem Description\cite{CHLBP2}
 \end{itemize}
+
+This is the same problem as in BP 2, but using the nonlinear shallow water
+equations and comparing to laboratory data rather than to the analytic
+solution of the linear equations.
 
 \subsubsection{What we did}
 \begin{itemize}
@@ -78,4 +87,8 @@ We performed a test to see how well Clawpack converged to the gage measurements 
 \subsubsection{Lessons learned}
 In this benchmark problem we found that using the measured data from Gage 4 as boundary conditions on a shorter domain, starting at this Gage, provided more accurate results than using the wave maker position and a longer domain to model the entire tank.  It appears that a similar assumption is made in the provided analytic solutions, as they match up nearly perfectly with the lab data for the first ten seconds.  
 
-Overall this benchmark problem is a good test for one dimensional codes.  The benchmark problem specifications could be improved by specifying the computational domain and the specific data source that should be used to model the incoming wave. 
+Overall this benchmark problem is a good test for one dimensional codes.  
+Case C exhibits dispersion in the laboratory results not seen with the
+nonlinear shallow water equations.
+
+The benchmark problem specifications could be improved by specifying the computational domain and the specific data source that should be used to model the incoming wave. 
