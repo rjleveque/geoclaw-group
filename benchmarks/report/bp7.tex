@@ -24,26 +24,17 @@ at \cite{bp-description}: \\
 coordinates with $g=9.81$ and no friction.  
 \item We used the given initial wave to specify a boundary condition at the left
 boundary up to time 20.  This was done by filling ghost cells each time step
-at the left edge of the computational domain, with cell centers at $x = -
-\frac 1 2 \Delta x$ and $x = -\frac 3 2 \Delta x$.
-The depth at any such point $x_0$ at arbitrary time $t_0$ should be roughly
-the same as the depth at $x=0$ at time $t_0 - x_0/c_0$, where $c_0 =
-\sqrt{gh_0}$ is the wave speed based on the constant depth.  This value was
-estimated by 
-interpolating from the given time trace at $x=0$.
-To fully specify the ghost cell values we also need the velocity or momentum
-in these cells.  This is estimated by assuming the wave is a right-going
-simple wave, so that the Riemann invariant $u - 2\sqrt{gh}$ is constant
-through the wave.  Inserting the interpolated $h$ value and then setting this
-equal to $-2\sqrt{gh_0}$ gives the expression for the velocity $u$ used in
-the ghost cell.
+at the left edge of the computational domain with depth values interpolated
+from the given time trace at $x=0$.  Momentum values were determined as
+described in \Sec{bc:inflow}.
 
 \item After time 20, the boundary condition procedure
-switched to non-reflecting boundary condition 
-at left boundary, so reflected waves exit.  
+switched to non-reflecting boundary conditions (see \Sec{bc-outflow})
+at the left boundary, so reflected waves exit.  
 (Note that the wave tank was much longer than computational domain specified.)
 \item We solved on $423\times 243$ grid (same as bathymetry), with no
 adaptive mesh refinement.
+Solid wall boundary conditions were used at the top and bottom.
 \item We also solved on $211\times 121$ grid, coarser by roughly a factor of
 2, for comparison as a test of convergence.
 \end{itemize} 

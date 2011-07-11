@@ -15,7 +15,8 @@
 \begin{itemize}
 
 \item We solved the shallow water wave equation in Cartesian coordinates with $g = 9.81$ and no friction.
-\item To specify the incoming wave from the left boundary of our computational domain we used the first ten seconds of  measurements taken at Gage 4.  After ten seconds the left boundary switched to be a non-reflecting boundary.  This boundary is selected since the end of our computational domain is not the end of the physical wave tank.  The implementation of these boundary conditions is described in the section on benchmark problem 7. 
+\item To specify the incoming wave from the left boundary of our computational domain we used the first ten seconds of  measurements taken at Gage 4.  After ten seconds the left boundary switched to be a non-reflecting boundary.  This boundary is selected since the end of our computational domain is not the end of the physical wave tank.  
+The implementation of these boundary conditions is described in \Sec{bc}.
 \item Since the problem is one-dimensional, we solved on a $600 \times 2$ grid with no adaptive mesh refinement.
 \item To impose linearization we scaled the incoming wave by $10^{-4}$ to
 remove  any nonlinear behavior, then scaled up the gage readings by $10^4$
