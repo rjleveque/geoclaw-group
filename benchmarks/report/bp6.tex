@@ -4,9 +4,18 @@
 {\bf Documentation:}
 \begin {itemize}
 
+
 \item The Corps of Engineers website is the primary documentation for this benchmark problem:
 \url{http://chl.erdc.usace.army.mil/chl.aspx?p=s&a=Projects;35}
 \item Numerous other publications also describe this experiment, in varying detail: \cite{SynolakisBernard:pmel135, Briggs1994, Liu1994, Briggs1995, Liu1995, Briggs1996, Fujima2000}
+
+\item Problem description provided by Frank Gonz\'alez 
+ at \cite{bp-description}:\\
+\href{https://github.com/rjleveque/nthmp-benchmark-problems/blob/master/BP06-FrankG-Solitary_wave_on_a_conical_island/Description.pdf}
+{BP06-FrankG-Solitary\_wave\_on\_a\_conical\_island/Description.pdf} 
+\item \url{http://chl.erdc.usace.army.mil/chl.aspx?p=s&a=Projects;35}
+\item PMEL-135, pp 6 \& 39-45 \cite{SynolakisBernard:pmel135}.
+\item Other reference, below
 \end{itemize} 
 
 \subsubsection{Description}
@@ -24,7 +33,8 @@ The goal of this Benchmark Problem (BP) is to compare computed model results wit
 
 \begin{itemize}
 \item Used $g=9.81$ and no friction.
-\item Used the computational domain presented in Figure \ref{Domain}.
+\item Used the computational domain presented in Figure \ref{bp6Domain}.
+
 \item Used open boundary conditions for the top, bottom and right walls, and for the gaps between the ends of the wavemaker and the top and bottom walls.
 \item Used boundary conditions for the face of the wavemaker at the left wall corresponding to the [Randy ... need BC description, here.  --Frank]  
 \item Simulated Cases A and C, each with three different grid sizes and resolution, to demonstrate convergence:  28 X 24 (100 cm), 56 X 47 (50 cm) and  223 X 185 (12.5 cm)
@@ -32,7 +42,7 @@ The goal of this Benchmark Problem (BP) is to compare computed model results wit
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=6.0in]{bp6/Domain.pdf}\hfil
-\caption{\label{Domain}
+\caption{\label{bp6Domain}
 Basin geometry and coordinate system.  Solid lines represent approximate basin and wavemaker vertical surfaces.  Circles along walls and dashed lines represent rolls of wave absorbing material.  Note the gaps of approximately 0.38 m between each end of the wavemaker and the adjacent wall.  Gage positions are given in Figure \ref{Table}.
   }
 \end{figure}
@@ -54,6 +64,7 @@ Coordinates of laboratory gauges 1, 2, 3, 4, 6, 9, 16, and 22.
 \end{itemize}
 
   The first benchmark requirement was satisfied, as seen in Figures \ref{A12-5Movie} and \ref{C12-5Movie}.  Thus, for Cases A \& C we see in frames t=30 to t=36 seconds that the initial wave splits into two wave fronts in front of the island, which then collide behind the island. 
+
 
   The second benchmark requirement was satisfied, as seen in Figures \ref{C100Gages}, \ref{C50Gages} and \ref{C12-5Gages}.  The agreement between Lab and GeoClaw time series is seen to improve as the computational grid resolution is decreased from 100 to 12.5 cm.  The most obvious manifestation of this convergence is the improved value of the first wave amplitude.
 

@@ -13,7 +13,7 @@ from numpy import pi,tan,sin
 from scipy import sinh,cosh,tanh,arccosh
 
 # Set initial depth:
-d = 0.061
+#d = 0.061  ## now in setrun
 
 # These don't change:
 theta = 15. * pi / 180.
@@ -54,6 +54,8 @@ def setrun(claw_pkg='geoclaw', d_param = None):
     # check for d set as argument (when using run_tests.py):
     if d_param:
         d = d_param
+    else:
+        d = 0.061
 
     probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
     probdata.add_param('d', d, 'initial depth of mass')
@@ -92,8 +94,8 @@ def setrun(claw_pkg='geoclaw', d_param = None):
 
 
     # Number of grid cells:
-    clawdata.mx = 72*4
-    clawdata.my = 18*4
+    clawdata.mx = 72*2
+    clawdata.my = 18*2
 
 
     # ---------------
