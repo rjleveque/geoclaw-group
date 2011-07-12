@@ -72,7 +72,7 @@ def setrun(claw_pkg='geoclaw'):
 
     # Number of grid cells:
     clawdata.mx = 40  ##
-    clawdata.my = 50  ##
+    clawdata.my = 47  ##
 
 
     # ---------------
@@ -109,8 +109,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout =  2##
-        clawdata.tfinal = 10##
+        clawdata.nout =  12##
+        clawdata.tfinal = 240##
 #        clawdata.nout =  1##
 #        clawdata.tfinal = 1##
         
@@ -218,13 +218,13 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 2 ##
+    mxnest = 3 ##
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    clawdata.inratx = [4,6,2,10,15]  ##
-    clawdata.inraty = [4,6,2,10,15]  ##
+    clawdata.inratx = [6,6,10,10,15]  ##
+    clawdata.inraty = [6,6,10,10,15]  ##
     clawdata.inratt = [1,1,1,1,1]  ##
 
 
@@ -303,13 +303,16 @@ def setgeo(rundata):
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
         okushiri_dir + '/OK08.tt1'])  ## Dmitry N.'s version of Kansai U.
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24T.tt1'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24R.tt1'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24B.tt1'])  ## Dmitry N.'s version of Kansai U.
-    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-        okushiri_dir + '/OK24L.tt1'])  ## Dmitry N.'s version of Kansai U.
+        okushiri_dir + '/OK24.tt1'])  ## Dmitry N.'s version of Kansai U.
+
+    # geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/OK24T.tt1'])  ## Dmitry N.'s version of Kansai U.
+    # geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/OK24R.tt1'])  ## Dmitry N.'s version of Kansai U.
+    # geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/OK24B.tt1'])  ## Dmitry N.'s version of Kansai U.
+    # geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+    #     okushiri_dir + '/OK24L.tt1'])  ## Dmitry N.'s version of Kansai U.
         
     #geodata.topofiles = [[1, 1, 1, 0, 1.e10,'testbathy.tt1']]
     
@@ -340,6 +343,8 @@ def setgeo(rundata):
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     geodata.regions.append([1, 2, 0., 1e9, 0, 360, -90, 90])  ##
+    geodata.regions.append([1, 3, 0., 1e9, 139.4, 139.45, 42., 42.2])  ##
+
     # geodata.regions.append([1, 3, 0., 8000., 0., 360, -90, 90])  ##
     # restrict level 3 to follow closely behind leading wave:
     # for t in range(8000,50000,4000):
@@ -407,6 +412,10 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
+     # set iout* to 1 to output arrival time and/or surface max
+     # at each output time, fixed grid output has columns for:
+     # h, hu, hv, B, arrivaltime, surfacemax  
+     # (max seen so far)  _output/fort.fg0001, ...
 
     return rundata
     # end of function setgeo

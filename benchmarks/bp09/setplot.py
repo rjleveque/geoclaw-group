@@ -232,7 +232,7 @@ def setplot(plotdata):
 
     plotdata.printfigs = True                # print figures
     plotdata.print_format = 'png'            # file format
-    plotdata.print_framenos = [1]            # list of frames to print
+    plotdata.print_framenos = 'all'            # list of frames to print
 ##    plotdata.print_framenos = range(54,97) # list of frames to print (n1,n2): from n1 to n2-1 
 ##    plotdata.print_framenos = [53]         # list of frames to print
     plotdata.print_gaugenos = 'all'          # list of gauges to print
