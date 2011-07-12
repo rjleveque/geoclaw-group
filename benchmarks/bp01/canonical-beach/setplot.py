@@ -95,14 +95,15 @@ def setplot(plotdata):
     plotaxes = plotfigure.new_plotaxes('line')
     plotaxes.axescmd = 'subplot(211)'
     plotaxes.title = 'Surface'
-    plotaxes.xlimits = [-4.0,20.0]
+    #plotaxes.xlimits = [-4.0,20.0]
     #plotaxes.ylimits = [-1.2,0.6]
-    plotaxes.ylimits = [-0.04,0.11]
+    #plotaxes.ylimits = [-0.04,0.11]
 
 
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+    plotitem.show = False
     plotitem.map_2d_to_1d = eta_slice
     plotitem.color = 'b'
     plotitem.kwargs = {'linewidth':2}
@@ -120,6 +121,7 @@ def setplot(plotdata):
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+    plotitem.show = False
     plotitem.map_2d_to_1d = eta_slice
     plotitem.color = 'g'
     plotitem.plotstyle = '--'
@@ -130,6 +132,7 @@ def setplot(plotdata):
 
     # Topography
     plotitem = plotaxes.new_plotitem(plot_type='1d_from_2d_data')
+    #plotitem.show = False
     plotitem.map_2d_to_1d = B_slice
     plotitem.color = 'k'
     plotitem.outdir = outdir3
@@ -139,7 +142,8 @@ def setplot(plotdata):
         from numpy import hstack
         
         t = current_data.t
-        plot(t, 0*t, 'k')
+        #import pdb; pdb.set_trace()
+        #plot(t, 0*t, 'k')
 
 
         frameno = current_data.frameno
@@ -202,7 +206,7 @@ def setplot(plotdata):
         from numpy import hstack
         
         t = current_data.t
-        plot(t, 0*t, 'k')
+        #plot(t, 0*t, 'k')
 
 
         frameno = current_data.frameno
