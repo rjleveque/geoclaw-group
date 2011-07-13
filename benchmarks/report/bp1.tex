@@ -10,7 +10,7 @@
 \begin{itemize}
 \item Numerics for analytical solution to wave equation were hard to determine and should be provided in excel file in description of problem. Analytical solution was obtained from problem champion.
 \item No analytical solution given for time $t = 25s$
-\item Clawpack code ill suited to computing maximum runup. Additional module needed to be written. 
+\item Clawpack code does not include maximum runup calculation. Additional module needed to be written. 
 \end{itemize}
 
 \subsubsection{What we did}
@@ -40,10 +40,10 @@ Compare the numerically and analytically computer water level dynamics at locati
 See \Fig{bp1gauges}.
 
 \begin{figure}[ht]
-%\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/gauge0002fig300.png}\hfil
-%\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/gauge0001fig300.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/plotgauge2.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/plotgauge1.png}\hfil
+%\hfil\includegraphics[width=2.8in]{bp1/gauge0002fig300.png}\hfil
+%\hfil\includegraphics[width=2.8in]{bp1/gauge0001fig300.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/plotgauge2.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/plotgauge1.png}\hfil
 \caption{\label{fig:bp1gauges} 
 Left column: Gauge profile at location $x/d = 9.95$.
 Right column: Gauge profile at location $x/d = 0.25$.
@@ -61,30 +61,25 @@ See \Fig{bp1frames} for the computed and analytic results for the other
 times.
 
 \begin{figure}[ht]
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/bp1compt35.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/bp1compt45.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/frame0001fig2.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/frame0003fig2.png}\hfil
 \vskip 5pt
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/bp1compt55.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/bp1compt65.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/frame0005fig2.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp1/frame0007fig2.png}\hfil
 \caption{\label{fig:bp1frames} 
-Runup of wave on beach at 4 times.
-}
+Frames of solution. Top frame: Full view of incoming wave. Bottom Frame: Zoomed
+view of inundation area. The analytic and GeoClaw solutions are both
+plotted, but mostly lie on top of one another.}
 \end{figure}
 
-\ignore{
+\subsection{Maximum Runup}
+Compute the maximum runup.
+See \Fig{bp1runup}
 \begin{figure}[ht]
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/frame0001fig2.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/frame0003fig2.png}\hfil
-\vskip 5pt
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/frame0005fig2.png}\hfil
-\hfil\includegraphics[width=2.8in]{../bp01/canonical-beach/_plots/frame0007fig2.png}\hfil
-\caption{\label{fig:bp1frames} 
-Frames of runup. Top frame: Full view of incoming wave. Bottom Frame: Zoomed view of inundation area.}
+\hfil\includegraphics[width=5.5in]{bp1/runup.png}\hfil
+\caption{\label{fig:bp1runup} 
+Runup on canonical beach as a function of time}
 \end{figure}
-}
-
-%\subsubsection{Maximum Runup}
-%Compute the maximum runup.
 
 \subsubsection{Lessons learned}
 
