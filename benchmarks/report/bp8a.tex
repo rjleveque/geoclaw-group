@@ -13,6 +13,7 @@ See \Fig{bp8pcolor1}.
 
 \item PMEL-135, pp 7 \& 47-48 \cite{SynolakisBernard:pmel135}.
 
+
 \item The original experiment is fully described on NOAA's benchmarking website which can be found at 
 
 \url{http://nctr.pmel.noaa.gov/benchmark/Laboratory/Laboratory\_Landslide/index.html}
@@ -59,7 +60,8 @@ Zero-order extrapolation,
 which generally gives a very good approximation to non-reflecting boundary
 conditions as described in Section 7.3.1 of \cite{rjl:fvmhp}.  Solid wall
 boundary conditions are implemented as described in Section 7.3.3 of
-\cite{rjl:fvmhp}.
+\cite{rjl:fvmhp}.  See \Sec{bc} for more information on how these
+boundary conditions were specified.
 
 %\item See \Fig{bp8pcolor1} for a better picture of the problem set up.
 
@@ -72,7 +74,8 @@ for handling moving bathymetry in GeoClaw:  the value $B_{ij}^n$ is adjusted
 but the fluid depth $h_{ij}^n$ remains the same, so that the water column is
 simply displaced vertically in any cell where the bathymetry changes.  For
 bathymetry that is smoothly varying  in space and time
-this is considered a reasonable approach.  Note, however, that no momentum
+this is considered a reasonable approach (see \Sec{bp3}, for example).  
+Note, however, that no momentum
 is directly imparted to the water by the moving bathymetry.  
 
 For this problem, the vertical face of the wedge makes this approach
@@ -132,21 +135,22 @@ laboratory values at the two wave gauges and two runup gauges requested
 for case 1.  The gauge data for gauge 1 is initially very ``noisy" but the overall
 behavior seems to be captured well.  We suspect that since gauge 1 was in
 the wedge's path of travel and since the wedge was specified as part of our
-bathymetry, this created heavy oscillations in our wave formations.  This can
-best be observed by looking at \Fig{bp8pcolorcase1} for time 0.8 seconds.
-The results are in general a good match to the laboratory measurements.
+bathymetry, this created strong oscillations in our wave formations
+and an overshoot relative to the lab results.  
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=2.8in]{bp12/case1wavegauge1.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp12/case1runupgauge2.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp12/case1wavegauge2.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp12/case1runupgauge2.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp12/case1runupgauge3.png}\hfil
 \caption{\label{fig:bp8gauges1}
 Left column: Time histories of the surface elevation with respect to still
 water level for case 1.
 Right column: Time histories of the runup measurements with respect
-to still water level for case 1.
+to still water level for case 1, at Runup gages 2 and 3.  Note: runup
+values are negated in this figure for both GeoClaw and lab data due to
+a programming glitch.
   }
 \end{figure}
 
@@ -155,22 +159,22 @@ to still water level for case 1.
 \Fig{bp8gauges2} shows a comparison of the GeoClaw results with the
 laboratory values at the two wave gauges and two runup gauges requested
 for case 2.  As was the case for case 1, the gauge data for gauge 1 is initially
-very ``noisy" but the overall behavior seems to be captured well.  In looking at
-\Fig{bp8pcolorcase2} for time 0.8 seconds, one can see why this seems to 
-occur.  The results are in general a good match to the laboratory
-measurements.
+very ``noisy" but the overall behavior seems to be roughly consistent
+with the lab results. 
 
 \begin{figure}[ht]
 \hfil\includegraphics[width=2.8in]{bp12/case2wavegauge1.png}\hfil
 \hfil\includegraphics[width=2.8in]{bp12/case2runupgauge2.png}\hfil
 \vskip 5pt
 \hfil\includegraphics[width=2.8in]{bp12/case2wavegauge2.png}\hfil
-\hfil\includegraphics[width=2.8in]{bp12/case2runupgauge2.png}\hfil
+\hfil\includegraphics[width=2.8in]{bp12/case2runupgauge3.png}\hfil
 \caption{\label{fig:bp8gauges2}
 Left column: Time histories of the surface elevation with respect to still
 water level for case 2.
 Right column: Time histories of the runup measurements with respect
-to still water level for case 2.
+to still water level for case 2, at Runup gages 2 and 3.  Note: runup
+values are negated in this figure for both GeoClaw and lab data due to
+a programming glitch.
   }
 \end{figure}
 

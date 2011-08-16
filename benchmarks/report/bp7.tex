@@ -26,7 +26,7 @@ coordinates with $g=9.81$ and no friction.
 boundary up to time 20.  This was done by filling ghost cells each time step
 at the left edge of the computational domain with depth values interpolated
 from the given time trace at $x=0$.  Momentum values were determined as
-described in \Sec{bc:inflow}.
+described in \Sec{bc-inflow}.
 
 \item After time 20, the boundary condition procedure
 switched to non-reflecting boundary conditions (see \Sec{bc-outflow})
@@ -77,7 +77,7 @@ it is not clear what the starting time was for Frame 1 relative to the
 simulation time.   In the Benchmark Description \cite{bp-description}, it is
 stated that ``frame 10 approximately occurs at 15.3 seconds'', but then later
 ``it is recommend that each modeler find times of the snapshots that best fit
-the data''.   We found reasonably good agreement starting at 15 seconds for
+the data''.   We found reasonably good agreement starting at 15.0 seconds for
 Frame 1 and then taking 0.5 second increments, as shown in \Fig{bp7framesA}
 and \Fig{bp7framesB}.
 
@@ -130,7 +130,7 @@ Maximum runup relative to observed location (white dot).
   }
 \end{figure}
 
-\subsection{Runup in the valley}
+\subsubsection{Runup in the valley}
 The file {\tt OBS\_RUNUP.txt} from the benchmark specification contains
 the runup at 3 locations as observed in 6 runs of the same wavetank
 experiment.  The relevant location for runup in the valley is the first
@@ -143,7 +143,7 @@ $x=5.1575, y=1.88$ and several contour levels marked.  The contour lines are
 at levels 0.01 m apart.  The maximum runup appears to be around 0.08 to 0.10
 meters depending on what water depth is used to judge.
 
-\subsection{Lessons learned}
+\subsubsection{Lessons learned}
 
 
 

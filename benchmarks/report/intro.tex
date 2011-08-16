@@ -5,7 +5,6 @@
 \subsection{Geographic area}  The west coast, with a focus on Washington State,
 including Puget Sound, the San Juan Island group, and other islands in the
 Strait of Juan de Fuca.
-\todo{Should we mention California?  Oregon, Alaska, Hawaii?}
 
 
 \ignore{
@@ -15,10 +14,13 @@ hence which benchmark problems in the list you will be addressing and why.)
 }
 
 \subsection{NTHMP support}
-No current or past support from NTHMP.
-Funding is expected from NTHMP partner FEMA’s Risk Mapping, Assessment, and
-Planning (Risk MAP) Program, as part of the BakerAECOM coastal engineering
-effort for the FEMA California Coastal Analysis and Mapping (CCAMP) Project.
+This group has no current or past support from NTHMP.
+
+NTHMP approval of this model will allow us to seek funding in the
+future to perform tsunami hazard and risk assessment modeling, such as
+from NTHMP partner FEMA’s Risk Mapping,
+Assessment, and Planning (Risk MAP) Program.
+
 Funding will also be sought to provide Washington State with tsunami
 modeling and mapping in support of tsunami hazard assessment and emergency
 management planning and education.  
@@ -37,6 +39,32 @@ reviewed) papers where your model equations and other relevant validation
 and/or case studies for tsunami or otherwise have been published.)
 }
 
+\subsection{Model equations}
+
+For all benchmark problems we used the two-dimensional nonlinear
+shallow water equations
+\begin{equation}\label{2dSWE}
+\begin{split}
+  h_t &+ (hu)_x + (hv)_y = 0,\\
+  (hu)_t &+ (hu^2 + \half gh^2)_x + (huv)_y = -ghB_x - Du,\\
+  (hv)_t &+  (huv)_x+ (hv^2 + \half gh^2)_y = -ghB_y - Dv,
+\end{split}
+\end{equation}
+where $u(x,y,t)$ and $v(x,y,t)$ are the depth-averaged velocities in
+the two
+horizontal directions, $B(x,y,t)$ is the topography or bathymetry,
+and $D=D(h,u,v)$ is the drag coefficient.
+
+Most of the benchmark problems use no bottom friction, so $D=0$.  
+When used, it has the
+form
+\eql{drag}
+D = \frac{gM^2\sqrt{(u^2+v^2)}}{h^{5/3}}
+\end{equation}
+where $M$ is the Manning coefficient, generally taken to be $0.025$. 
+
+Coriolis terms can be turned on in GeoClaw, but have not been used for
+any of the benchmark problems.
 
 \subsection{Methods implemented in GeoClaw}
 GeoClaw is a variant of the Clawpack open source
@@ -286,4 +314,8 @@ results as simple error indicators of the performance of the model (e.g.,
 mean, max, rms errors).)}
 
 The sections below contain the GeoClaw results for each benchmark problem.
+Benchmark problem descriptions can be found in the Github repository
+\url{https://github.com/rjleveque/nthmp-benchmark-problems}
+\cite{bp-description} 
+along with data that was provided as part of the problem specification.
 

@@ -4,6 +4,7 @@
 
 \usepackage{amsmath,amsfonts,amssymb}
 
+\usepackage{chngcntr}
 \usepackage{color}
 \definecolor{mygreen}{rgb}{0.1,0.5,0.1}
 \newcommand{\mygreen}{\color{mygreen}}
@@ -21,6 +22,9 @@
 \setlength{\headsep}{26pt}
 
 \input{RJLmacros}
+\counterwithin{equation}{section}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 \graphicspath{{./}}
 
@@ -28,7 +32,7 @@
 % indicate which bp*.tex files to include: (comment out to include all)
 
 %\includeonly{bp5,bp6,bp7}
-%\includeonly{bp1,bp4}
+%\includeonly{bp8a}
 
 \begin{document}
 
