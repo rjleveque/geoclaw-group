@@ -113,7 +113,8 @@ $x=6.2$ outflow boundary conditions were used.  Zero-order extrapolation,
 which generally gives a very good approximation to non-reflecting boundary
 conditions as described in Section 7.3.1 of \cite{rjl:fvmhp}.  Solid wall
 boundary conditions are implemented as described in Section 7.3.3 of
-\cite{rjl:fvmhp}.
+\cite{rjl:fvmhp}.  See \Sec{bc} for more information about these
+boundary conditions.
 
 
 \end{itemize} 
@@ -165,8 +166,8 @@ captured in the simulations obtained with the shallow water equations.  This
 is consistent with claims in \cite{bp-description} and \cite{EnetGrilli}
 that dispersive effects are important for these short wavelength waves that
 cannot be captured by the non-dispersive shallow water equations.  By
-contrast, the Boussinesq model used in \cite{??} does display these
-dispersive ripples.
+contrast, the Boussinesq model used in \cite{FuhrmanMadsen} 
+does display these dispersive ripples.
 
 
 
@@ -183,6 +184,9 @@ dispersive ripples.
 
 \caption{\label{fig:bp3gauge1} 
 Gauge and runup results for $d=0.061$.
+Three different resolutions with my$=18$, 36,  and 72 points
+in the $y$ direction were compared, with mx $= 4$my points in the $x$
+direction.
   }
 \end{figure}
 
@@ -333,7 +337,10 @@ d & Lab & my $= 36$ & my $= 72$ \\
 %\begin{center}
 \caption{\label{fig:bp3runup} 
 Runup values in mm.  Lab results taken from Table 1 of
-\cite{bp-description}.
+\cite{bp-description}. 
+Two different resolutions with 36 and 72 points
+in the $y$ direction were compared, with mx $= 4$my points in the $x$
+direction.
   }
 \end{table}
 

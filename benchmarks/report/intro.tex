@@ -66,7 +66,7 @@ issue of
 {\it Advances in Water Resources} on
 ``New Computational Methods and Software Tools'',
 and in \cite{LeVequeGeorgeBerger:an11}, an invited paper in {\it Acta
-Numerica}, a sort of ``annual review of numerical analysis''.
+Numerica}, which serves as an ``annual review of numerical analysis''.
 There is also 
 on-line documentation \cite{geoclaw-doc} that is part of the extensive
 documentation of Clawpack.
@@ -139,6 +139,16 @@ even when the solution contains strong shock waves.
 \subsection{Boundary conditions}\label{sec:bc}
 Boundary conditions at edges of the computational domain are handled as
 described in Chapter 7 of \cite{rjl:fvmhp}.
+At the start of each time step, solution values are assigned in two
+rows of ghost cells surrounding the computational domain.  This allows
+the high-resolution finite volume methods to be applied on all cells
+that lie inside the computational domain.  One row of ghost cells is
+required in order to solver Riemann problems at edges of the physical
+cells adjacent to the boundary.  The second row is required in order
+to apply limiters.
+Here we summarize the boundary conditions used in the benchmark
+problems.  
+
 \subsubsection{Non-reflecting boundaries}\label{sec:bc-outflow}
 Zero-order extrapolation from the grid cells along the boundary to ghost
 cells in every time step is used to implement non-reflecting boundary
@@ -147,7 +157,10 @@ Godunov-type methods implemented in GeoClaw solve Riemann problems at each
 grid interface and having equal values in the grid cell at the boundary and
 the adjacent ghost cell results in no incoming wave.  These boundary
 conditions are described in more detail in
-Section 7.3.1 of \cite{rjl:fvmhp}.  
+Section 7.3.1 of \cite{rjl:fvmhp}.  Although not perfectly absorbing
+for waves hitting the boundary at a non-normal angle, they perform
+very well in practice and have been extensively used for similar
+problems.
 
 \subsubsection{Solid wall boundaries}\label{sec:bc-solid}
 Several benchmark problems are posed in wave tanks with solid (reflecting)
@@ -171,11 +184,22 @@ solution is a simple wave in the incoming wave family.
 
 For example, at
 the left edge of the computational domain, an incoming wave would be a
-right-going wave with Riemann invariant $u - 2\sqrt{gh}$ and the value of
-this should be constant through the wave, and hence equal to $-2\sqrt{gh_0}$
+right-going wave with constant values of the
+Riemann invariant $u - 2\sqrt{gh}$ throughout the wave.
+This value must be $-2\sqrt{gh_0}$
 where $h_0$ is the depth of the undisturbed water before the wave arrives.
 From this the velocity $u = 2(\sqrt{gh} - \sqrt{gh_0})$ can be determined
-for any depth $h$.
+for any depth $h$.  Hence the given depth as a function of time at a
+wave gauge can be used to determine the depth and momentum at this
+point as a function of time, which in turn is used to fill ghost
+cells.
+
+\subsubsection{Initial conditions}\label{sec:ic}
+In other problems, an initial wave form $h(x,t=0)$ is specified as a
+function of $x$ at time $t=0$, representing a propagating wave form.
+Again the Riemann invariants can be used to
+determine the momentum at each point in order to specify initial
+conditions.
 
 
 
@@ -206,14 +230,14 @@ towards the island.  In this paper the Chile 2010 tsunami is also used as a
 test problem and good agreement with measured results at DART Buoy 32412
 are obtained, on two different grid resolutions to test convergence.
 See also 
-\url{http://kingkong.amath.washington.edu/clawpack/links/awr11/}
+\url{http://www.clawpack.org/links/awr11/}
 for codes and animations.
 
 
 \item Further tests of this same problems are presented in
 \cite{LeVequeGeorgeBerger:an11}.  
 See also 
-\url{http://kingkong.amath.washington.edu/clawpack/links/an11/}
+\url{http://www.clawpack.org/links/an11/}
 for codes and animations.
 
 \item Grid refinement studies and comparison with field data for the widely
@@ -245,7 +269,7 @@ Our group is currently using GeoClaw to model the Great Tohoku Tsunami of 11
 March 2011 and preliminary comparisons with DART buoy data looks very good.
 Some results were posted online as computed in the days after the event and
 can be viewed at
-\url{http://kingkong.amath.washington.edu/clawpack/links/honshu2011/}.
+\url{http://www.clawpack.org/links/honshu2011/}.
 Some comparisons were also presented in a recent article in SIAM News on tsunami
 modeling \cite{siamnews-tsunami}.  Preliminary results have also been
 obtained by other groups, e.g. \cite{ZhangYuenEtal:2011}.

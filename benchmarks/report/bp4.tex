@@ -42,7 +42,9 @@ Schematic of computational domain.
 
 \begin{itemize}
 \item Used $g=1$ and no friction.
-\item The bathymetry consisted of a deep plateau of constant depth $d$ connected to a sloping beach of angle $\beta = arccot(19.85)$. Note that the toe of the beach was located at $x = X_0 = d cot \beta$
+\item The bathymetry consisted of a deep plateau of constant depth $d$
+connected to a sloping beach of angle $\beta = \text{arccot}(19.85)$.
+Note that the toe of the beach was located at $x = X_0 = d\, \text{cot} \beta$
 \item The initial waveform of the wave was given by 
 \begin{equation}
 \eta(x,0) = H \text{sech}^2(\gamma (x - X_1)/d)
@@ -52,8 +54,12 @@ and $\gamma = \sqrt(3H/4d)$. The speed of the wave is given by:
 \begin{equation}
 u(x,0)=-\sqrt{g/d}\eta(x,0)
 \end{equation}
-\item For the low amplitude case, we set d = 1 cm, H = 0.0185 cm, and ran the computations on an $800\times 2$ grid, where the x domain spanned from x = -10 to x = 60.
-\item For the high amplitude case, we set d = 1 cm, H = 0.3 cm, and ran the computations on a $1200\times 2$ grid, where the x domain spanned from x = -10 to x = 60.
+\item For the low amplitude case, we set $d = 1$ cm, $H = 0.0185$ cm, and
+ran the computations on an $800\times 2$ grid, where the x domain
+spanned from $x = -10$ to $x = 60$.
+\item For the high amplitude case, we set $d = 1$ cm, $H = 0.3$ cm,
+and ran the computations on a $1200\times 2$ grid, where the x domain
+spanned from $x = -10$ to $x = 60$.
 \item We allowed variable time stepping based on a CFL number of 0.9
 \end{itemize} 
 
@@ -76,6 +82,7 @@ Figures \ref{bp2framesa} and \ref{bp2framesb} present the computed and measured 
 \hfil\includegraphics[width=2.8in]{bp4/lab-185/frame0005fig2.png}\hfil
 \caption{\label{bp2framesa} 
 Runup computations for the low amplitude case. In the paired plots for each time value, the bottom frame provides a zoomed view of the inundation area for the incident wave presented in the top frame.
+\todo{Replot with only two curves?}
 }
 \end{figure}
 
@@ -87,6 +94,7 @@ Runup computations for the low amplitude case. In the paired plots for each time
 \hfil\includegraphics[width=2.8in]{bp4/lab-3/frame0004fig2.png}\hfil
 \caption{\label{bp2framesb} 
 Runup computations for the high amplitude case. In the paired plots for each time value, the bottom frame provides a zoomed view of the inundation area for the incident wave presented in the top frame.
+\todo{Replot with only two curves?}
 }
 \end{figure}
 
@@ -107,10 +115,15 @@ Maximum runup estimate of 0.42 cm for the high amplitude case, occurring at 40 s
 \begin{figure}[ht]
 \hfil\includegraphics[width=5.0in]{bp4/bp4maxrscatter.pdf}\hfil
 \caption{\label{bp4maxrscatter} 
-Scatter plot of nondimensional maximum runup, R/d, versus nondimensional incident wave height, H/d, resulting from a total of more than 40 experiments conducted by Y. Joseph Zhan and described at \cite{bp-description}:\\
+Scatter plot of nondimensional maximum runup, R/d, versus nondimensional incident wave height, H/d, resulting from a total of more than 40 experiments conducted by Y. Joseph Zhan and described at \cite{bp-description}.\\
+\todo{Add points for our two experiments?}
 }
 \end{figure}
 
-\subsection{Lessons learned}
+\subsubsection{Lessons learned}
 
 For test cases in which amplitudes are so large that the shallow water wave assumptions are violated, it can be expected that computed and observed wave height and runup will not agree as well as in cases characterized by amplitudes for which the shallow water wave assumptions are valid.
+
+For the high-amplitude $H/d = 0.3$ case, our observed runup of $0.42$
+agrees well with the experimental results shown in
+Figure~\ref{bp4maxrscatter}.
