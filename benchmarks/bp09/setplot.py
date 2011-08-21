@@ -30,7 +30,7 @@ def setplot(plotdata):
 
     plotdata.clearfigures()  # clear any old figures,axes,items data
 
-    # To plot gauge locations on imshow or contour plot, use this as
+    # To plot gauge locations on pcolor or contour plot, use this as
     # an afteraxis function:
 
     def addgauges(current_data):
@@ -39,14 +39,14 @@ def setplot(plotdata):
              gaugenos='all', format_string='ko', add_labels=True, fontsize=8)
 
     #-----------------------------------------
-    # Figure for imshow plot
+    # Figure for pcolor plot
     #-----------------------------------------
 
     plotfigure = plotdata.new_plotfigure(name='full domain', figno=0)
-    plotfigure.show = True  # Turn the imshow plot on or off (True or False) 
+    plotfigure.show = True  # Turn the pcolor plot on or off (True or False) 
 
     # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes('imshow')
+    plotaxes = plotfigure.new_plotaxes('pcolor')
     plotaxes.show = True  ### Turn on or off the full domain plot
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
@@ -68,8 +68,8 @@ def setplot(plotdata):
         addgauges(current_data)
     plotaxes.afteraxes = fixup
     
-    plotaxes.xlimits = [137.57,141.41] # Full Domain
-    plotaxes.ylimits = [39.67,44.15] # Full Domain
+    # plotaxes.s = [137.57,141.41] # Full Domain
+    # plotaxes.ylimits = [39.67,44.15] # Full Domain
     # plotaxes.xlimits = [139., 140.] ## Okushiri Island (Large area)
     # plotaxes.ylimits = [41.5, 42.5]   ## Okushiri Island  (Large area)
     # plotaxes.xlimits = [139.43, 139.48] ## Aonae peninsula
@@ -82,38 +82,39 @@ def setplot(plotdata):
     # plotaxes.ylimits = [42.096, 42.106]   ## Monai Short
 
     # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     plotitem.show = True
     #plotitem.plot_var = geoplot.surface
     plotitem.plot_var = geoplot.surface_or_depth
-    # plotitem.imshow_cmap = geoplot.tsunami_colormap
-    # plotitem.imshow_cmap = colormaps.blue_white_red
+    # plotitem.pcolor_cmap = geoplot.tsunami_colormap
+    # plotitem.pcolor_cmap = colormaps.blue_white_red
     # dictionary of [R,G,B] values at different levels:
     my_cmap_surface = colormaps.make_colormap({-1.0: [0.0,0.0,1.0], \
                                       -0.02: [0.75,0.75,1.0], \
                                        0.0: [1.0,1.0,1.0], \
                                        0.02: [1.0,0.75,0.75], \
                                        1.0: [1.0,0.0,0.0]})
-    plotitem.imshow_cmap = my_cmap_surface
-    plotitem.imshow_cmin = -20.
-    plotitem.imshow_cmax =  20.
+    plotitem.pcolor_cmap = my_cmap_surface
+    plotitem.pcolor_cmin = -5.
+    plotitem.pcolor_cmax =  5.
     plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0,0,0] # Turn off/0n = 0/1 gridlines for levels [1,2,3, ...]
+    plotitem.amr_gridedges_show = [1]
+    # plotitem.amr_gridlines_show = [0,0,0,0,0] # Turn off/0n = 0/1 gridlines for levels [1,2,3, ...]
     # plotitem.gridedges_show = 0
     #plotitem.amr_data_show = [1,1,1,1,0]
 
     # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     plotitem.show = True
     plotitem.plot_var = geoplot.land
     my_cmap_land = colormaps.make_colormap({ \
                                             0.0: [0.0,1.0,0.0], \
                                             1.0: [0.0,0.5,0.0] \
                                             })
-    plotitem.imshow_cmap = my_cmap_land                                   
-    # plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
+    plotitem.pcolor_cmap = my_cmap_land                                   
+    # plotitem.pcolor_cmap = geoplot.land_colors
+    plotitem.pcolor_cmin = 0.0
+    plotitem.pcolor_cmax = 100.0
     plotitem.add_colorbar = True
     # plotitem.amr_gridlines_show = [0,0,0]
     # plotitem.gridedges_show = 0
@@ -121,28 +122,33 @@ def setplot(plotdata):
 
     # add contour lines of bathy if desired:
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
+    plotitem.show = False
     plotitem.plot_var = geoplot.topo
-    plotitem.contour_levels = linspace(-5000,-100,6)
-    plotitem.amr_contour_colors = ['y']  # color on each level
+    plotitem.contour_levels = linspace(-20,20,11)
+    plotitem.amr_contour_colors = ['k']  # color on each level
     plotitem.kwargs = {'linestyles':'solid','linewidths':1}
-    # plotitem.amr_contour_show = [0,0,0]  
+    plotitem.amr_contour_show = [0,0,0,1]  
+    
+    
     # plotitem.gridlines_show = 0
     # plotitem.gridedges_show = 0
     #plotitem.amr_data_show = [1,1,1,0]
+    
+    
 
     # Topo = Bathymetry and Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     plotitem.show = False
     plotitem.plot_var = geoplot.topo
-    # plotitem.imshow_cmap = geoplot.bathy3_colormap  #Try 1, 2 & 3
+    # plotitem.pcolor_cmap = geoplot.bathy3_colormap  #Try 1, 2 & 3
     
     my_cmap_topo = colormaps.make_colormap({ \
         -5000.0: [0,0,1], 0.0: [1,1,1], 100.0: [0.0,0.5,0.0] \
                                             })
-    plotitem.imshow_cmap = my_cmap_topo
+    plotitem.pcolor_cmap = my_cmap_topo
     
-    plotitem.imshow_cmin = -5000.0
-    plotitem.imshow_cmax = 100.0
+    plotitem.pcolor_cmin = -5000.0
+    plotitem.pcolor_cmax = 100.0
     plotitem.add_colorbar = False
     # plotitem.amr_gridlines_show = [0,0,0]
     # plotitem.gridedges_show = 0
@@ -167,7 +173,7 @@ def setplot(plotdata):
     plotfigure.show = False  # Turn the zoom plot on or off (True or False) 
 
     # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes('imshow')
+    plotaxes = plotfigure.new_plotaxes('pcolor')
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
     ## 
@@ -201,13 +207,13 @@ def setplot(plotdata):
     plotaxes.afteraxes = fixup
 
     # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     #plotitem.plot_var = geoplot.surface
     plotitem.plot_var = geoplot.surface_or_depth
-    # plotitem.imshow_cmap = geoplot.tsunami_colormap 
-    plotitem.imshow_cmap = colormaps.blue_white_red
-    plotitem.imshow_cmin = -5.
-    plotitem.imshow_cmax =  5.
+    # plotitem.pcolor_cmap = geoplot.tsunami_colormap 
+    plotitem.pcolor_cmap = colormaps.blue_white_red
+    plotitem.pcolor_cmin = -5.
+    plotitem.pcolor_cmax =  5.
     plotitem.add_colorbar = True
     plotitem.amr_gridlines_show = [0,0,0]  ##Levels of refinement
     plotitem.gridedges_show = 1
@@ -224,11 +230,11 @@ def setplot(plotdata):
     plotitem.gridedges_show = 1
 
     # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+    plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')
     plotitem.plot_var = geoplot.land
-    plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
+    plotitem.pcolor_cmap = geoplot.land_colors
+    plotitem.pcolor_cmin = 0.0
+    plotitem.pcolor_cmax = 100.0
     plotitem.add_colorbar = True
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.gridedges_show = 1
@@ -250,7 +256,7 @@ def setplot(plotdata):
 
     plotfigure = plotdata.new_plotfigure(name='Surface & topo', figno=2, \
                     type='each_gauge')
-    plotfigure.clf_each_gauge = True     # Switch gauge figures on or off
+    plotfigure.clf_each_gauge = False    # Switch gauge figures on or off
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
