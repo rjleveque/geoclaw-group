@@ -122,8 +122,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Note:  Frame time intervals = (tfinal-t0)/nout
-        clawdata.nout = 16 ## Number of frames (plus the t = 0.0 frame)
-        clawdata.tfinal = 16.*60  ## End run time in Seconds
+        clawdata.nout = 7 ## Number of frames (plus the t = 0.0 frame)
+        clawdata.tfinal = 350.  ## End run time in Seconds
                 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -225,8 +225,8 @@ def setrun(claw_pkg='geoclaw'):
 
     # List of refinement ratios at each level (length at least mxnest-1)
             ## Levels  2 3 4 5
-    clawdata.inratx = [2,4,4,12] ## 
-    clawdata.inraty = [2,4,4,12] ## 
+    clawdata.inratx = [2,4,4,24] ## 
+    clawdata.inraty = [2,4,4,24] ## 
     clawdata.inratt = [2,4,4,2] ##
 
     # Specify type of each aux variable in clawdata.auxtype.
@@ -286,7 +286,7 @@ def setgeo(rundata):
 
     #okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
       #+ 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
-    okushiri_dir = '../bp09'  ## this directory
+    okushiri_dir = '..'
     
     # == settopo.data values ==
     geodata.topofiles = []
@@ -298,12 +298,12 @@ def setgeo(rundata):
         okushiri_dir + '/OK08.tt1'])  ## 8-s, ~184-247 m Okushiri (Dmitry's version of Kansai U.)
     geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
         okushiri_dir + '/OK03.tt1'])  ## 2.67 s (8/3s), ~61-82 m Okushiri (Dmitry's version of Kansai U.)
+    #geodata.topofiles.append([1, 1, 1, 0., 1.e10, \
+    #    okushiri_dir + '/AO15.tt1'])  ## 0.53-0.89 s, ~16.5-20.4 m, Aonae (Dmitry's version of Kansai U.)
+    geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
+        okushiri_dir + '/MO01.tt1'])  ## 0.89 s, ~20-27 m, Monai (Dmitry's version of Kansai U.)
     geodata.topofiles.append([1, 1, 1, 0., 1.e10, \
-        okushiri_dir + '/AO15.tt1'])  ## 0.53-0.89 s, ~16.5-20.4 m, Aonae (Dmitry's version of Kansai U.)
-    # geodata.topofiles.append([1, 1, 1, 0, 1.e10, \
-    #     okushiri_dir + '/MO01.tt1'])  ## 0.89 s, ~20-27 m, Monai (Dmitry's version of Kansai U.)
-    # geodata.topofiles.append([1, 1, 1, 0., 1.e10, \
-    #     okushiri_dir + '/MB05.tt1'])  ## 0.13-0.18 s, ~4 m Monai (Dmitry's version of Kansai U.)
+        okushiri_dir + '/MB05.tt1'])  ## 0.13-0.18 s, ~4 m Monai (Dmitry's version of Kansai U.)
 
     # geodata.topofiles.append([-3, 1, 1, 0, 1.e10, \
     #     okushiri_dir + '/depth40_138.txt'])  ## JODC 500 m
@@ -346,11 +346,12 @@ def setgeo(rundata):
     geodata.regions.append([1, 2, 0., 1e9, 138.5,  139.7,  41.4,  43.3])  ## OK08: 8-s, ~184-247 m Okushiri 
     geodata.regions.append([1, 3, 0., 1e9, 139.39, 139.6,  42.0,  42.25])  ## OK03: 2.67 s (8/3s), ~61-82 m Okushiri 
     # geodata.regions.append([1, 4, 0., 1e9, 139.42, 139.57, 42.03, 42.23])  ## AO15: 0.53-8/9 s, ~16.5-20.4 m, Aonae 
-    geodata.regions.append([1, 4, 0., 1e9, 139.41, 139.49, 42.02, 42.08])  ## 
+    #geodata.regions.append([1, 4, 0., 1e9, 139.41, 139.49, 42.02, 42.08])  ## 
+    geodata.regions.append([1, 4, 0., 1e9, 139.41, 139.49, 42.07, 42.12])  ## 
     
-    geodata.regions.append([5, 5, 180., 1e9, 139.44,139.46,42.035,42.055])  ## Aonae 
-    # geodata.regions.append([4, 4, 0., 1e9, 139.41, 139.43, 42.08, 42.15])  ## MO01: 8/9 s, ~20-27 m, Monai 
-    # geodata.regions.append([5, 5, 0., 1e9, 139.41, 139.43, 42.095, 42.100])  ## MB05: 0.13-0.18 s, ~4 m Monai
+    #geodata.regions.append([5, 5, 180., 1e9, 139.44,139.46,42.035,42.055])  ## Aonae 
+    #geodata.regions.append([4, 4, 0., 1e9, 139.41, 139.43, 42.08, 42.15])  ## MO01: 8/9 s, ~20-27 m, Monai 
+    geodata.regions.append([5, 5, 200., 1e9, 139.414, 139.425, 42.096, 42.100])  ## MB05: 0.13-0.18 s, ~4 m Monai
     # geodata.regions.append([3,3, 0., 1e9, 139.40662684821325, 139.41794012636134, \
     #     42.158684332627985, 42.16622651806005])  ## Station 800
     # geodata.regions.append([5, 5, 0., 1e9, 139.42059926730784, 139.42538420014014, \
@@ -463,15 +464,17 @@ def setgeo(rundata):
     # h, hu, hv, B, arrivaltime, surfacemax  
     # (max seen so far)  _output/fort.fg01_0001, ... fort.fgMM_NNNN.  M=grid number, N=time
 
-    # geodata.fixedgrids.append([0.0,1200.0,5,139.42309065950826,139.42416180042954, \
+    #geodata.fixedgrids.append([0.0,1200.0,5,139.42309065950826,139.42416180042954, \
     #     42.099625599311729,42.100760429693182,40,40,0,1]) ## Sta 500 Monae Runup
+    geodata.fixedgrids.append([220.0,300.0,17,139.422,139.425, \
+         42.097,42.101,150,200,0,1]) ## Sta 500 Monae Runup
     
     # geodata.fixedgrids.append([0.0,21*60.,5,139.43,139.48, \
     #     42.035,42.065,22,34,0,1]) ## Aonae Peninsula Runup
     
     # geodata.fixedgrids.append([180.0,8*60.,14,139.42,139.48, \
     #         42.02,42.08,200,200,0,1]) ## Aonae Peninsula Runup
-    geodata.fixedgrids.append([180.0,16*60.,27,139.44,139.46,42.035,42.055,200,200,0,1]) ## Aonae Peninsula Runup
+    #geodata.fixedgrids.append([180.0,16*60.,27,139.44,139.46,42.035,42.055,200,200,0,1]) ## Aonae Peninsula Runup
             
         
     # geodata.fixedgrids.append([0.0,1200.0,5,139.41999842833241,139.42598037189106, \
