@@ -219,7 +219,7 @@ def setrun(claw_pkg='geoclaw'):
     # ---------------
 
     # max number of refinement levels:
-    mxnest = 5 ## 
+    mxnest = 4 ## 
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -471,7 +471,7 @@ def setgeo(rundata):
     
     # geodata.fixedgrids.append([180.0,8*60.,14,139.42,139.48, \
     #         42.02,42.08,200,200,0,1]) ## Aonae Peninsula Runup
-    geodata.fixedgrids.append([180.0,16*60.,27,139.44,139.46,42.035,42.055,200,200,0,1]) ## Aonae Peninsula Runup
+    geodata.fixedgrids.append([200.0,16*60.,27,139.44,139.46,42.035,42.055,200,200,0,1]) ## Aonae Peninsula Runup
             
         
     # geodata.fixedgrids.append([0.0,1200.0,5,139.41999842833241,139.42598037189106, \

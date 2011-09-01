@@ -47,6 +47,13 @@ def setplot(plotdata):
 
     plotdata.beforeframe = set_drytol
 
+    def saveframe(current_data):
+        import pylab
+        fname = 'ok_%smin.png' % current_data.frameno
+        pylab.savefig(fname)
+        print 'Saved ',fname
+    #plotdata.afterframe = saveframe
+
     # To plot gauge locations on pcolor or contour plot, use this as
     # an afteraxis function:
 
@@ -86,8 +93,9 @@ def setplot(plotdata):
     # plotaxes.ylimits = [41.5, 42.5]   ## Okushiri Island  (Large area)
     # plotaxes.xlimits = [139.43, 139.48] ## Aonae peninsula
     # plotaxes.ylimits = [42.03, 42.06]   ## Aonae peninsula
-    plotaxes.xlimits = [139.35, 139.6] ## Okushiri Island (Tight)
-    plotaxes.ylimits = [42.0, 42.25]   ## Okushiri Island (Tight)
+    #plotaxes.xlimits = [139.35, 139.6] ## Okushiri Island (Tight)
+    #plotaxes.ylimits = [42.0, 42.25]   ## Okushiri Island (Tight)
+
     # plotaxes.xlimits = [139.41, 139.43] ## Monai Long Coast
     # plotaxes.ylimits = [42.08, 42.15]   ## Monai Long Coast
     # plotaxes.xlimits = [139.418, 139.426] ## Monai Short
@@ -107,10 +115,10 @@ def setplot(plotdata):
                                        0.02: [1.0,0.75,0.75], \
                                        1.0: [1.0,0.0,0.0]})
     plotitem.pcolor_cmap = my_cmap_surface
-    plotitem.pcolor_cmin = -20.
-    plotitem.pcolor_cmax =  20.
-    plotitem.add_colorbar = True
-    plotitem.amr_gridedges_show = [0]
+    plotitem.pcolor_cmin = -5.
+    plotitem.pcolor_cmax =  5.
+    plotitem.add_colorbar = False
+    plotitem.amr_gridedges_show = [1]
     # plotitem.amr_gridlines_show = [0,0,0,0,0] # Turn off/0n = 0/1 gridlines for levels [1,2,3, ...]
     # plotitem.gridedges_show = 0
     #plotitem.amr_data_show = [1,1,1,1,0]
@@ -127,7 +135,7 @@ def setplot(plotdata):
     # plotitem.pcolor_cmap = geoplot.land_colors
     plotitem.pcolor_cmin = 0.0
     plotitem.pcolor_cmax = 100.0
-    plotitem.add_colorbar = True
+    plotitem.add_colorbar = False
     # plotitem.amr_gridlines_show = [0,0,0]
     # plotitem.gridedges_show = 0
     #plotitem.amr_data_show = [1,1,1,1,0]

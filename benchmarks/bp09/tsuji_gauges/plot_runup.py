@@ -92,5 +92,5 @@ for i in range(len(x)):
     plot([xg[i],xgeo[i]],[yg[i],ygeo[i]],'g-')
 
 axis('scaled')
-title('Run-up (red circles = observations)')
+#title('Run-up (red circles = observations)')
 axis('off')

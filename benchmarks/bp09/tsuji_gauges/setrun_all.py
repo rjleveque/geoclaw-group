@@ -1,4 +1,5 @@
-## Randy:  This run took about 4 hours, as it is set up now.
+
+## Need to increase max regions and fgrids and adjust regions !!
 
 """
 Module to set up run time parameters for Clawpack.
@@ -38,11 +39,6 @@ def setrun(claw_pkg='geoclaw'):
 
     #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
-    #------------------------------------------------------------------
-    # GeoClaw specific parameters:
-    #------------------------------------------------------------------
-
-    rundata = setgeo(rundata)   # Defined below
 
     #------------------------------------------------------------------
     # Standard Clawpack parameters to be written to claw.data:
@@ -122,8 +118,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Note:  Frame time intervals = (tfinal-t0)/nout
-        clawdata.nout = 10 ## Number of frames (plus the t = 0.0 frame)
-        clawdata.tfinal = 6.5*60  ## End run time in Seconds
+        clawdata.nout = 20 ## Number of frames (plus the t = 0.0 frame)
+        clawdata.tfinal = 20*60  ## End run time in Seconds
                 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -246,6 +242,12 @@ def setrun(claw_pkg='geoclaw'):
 
     # More AMR parameters can be set -- see the defaults in pyclaw/data.py
 
+    #------------------------------------------------------------------
+    # GeoClaw specific parameters:
+    #------------------------------------------------------------------
+
+    rundata = setgeo(rundata)   # Defined below
+
     return rundata
     # end of function setrun
     # ----------------------
@@ -347,50 +349,105 @@ def setgeo(rundata):
     geodata.regions.append([1, 3, 0., 1e9, 139.39, 139.6,  42.0,  42.25])  ## OK03: 2.67 s (8/3s), ~61-82 m Okushiri 
     # geodata.regions.append([1, 4, 0., 1e9, 139.42, 139.57, 42.03, 42.23])  ## AO15: 0.53-8/9 s, ~16.5-20.4 m, Aonae 
     #geodata.regions.append([1, 4, 0., 1e9, 139.40, 139.46, 42.03, 42.22])  ## West coast Okushiri
-    geodata.regions.append([4, 4, 90., 1e9, 139.42, 139.431, 42.07, 42.12])
+    #geodata.regions.append([4, 4, 90., 1e9, 139.4, 139.432, 42.12, 42.2])
+    geodata.regions.append([4, 4, 90., 1e9, 139.4, 139.43, 42.02, 42.08])
+    #geodata.regions.append([4, 4, 90., 1e9, 139.46, 139.55, 42.04, 42.14])
     
 
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     
-    # geodata.gauges.append([1,139.429211710298,42.188181491811,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([3,139.411185686023,42.162762869034,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([5,139.418261206409,42.137404393442,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([1,139.429211710298,42.188181491811,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([3,139.411185686023,42.162762869034,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([5,139.418261206409,42.137404393442,0.0,1e9]) ## Tsuji Obs
     geodata.gauges.append([6,139.428035766149,42.093012384481,0.0,1e9]) ## Tsuji Obs
     geodata.gauges.append([7,139.426244998662,42.116554785296,0.0,1e9]) ## Tsuji Obs
     geodata.gauges.append([8,139.423714744650,42.100414145210,0.0,1e9]) ## Tsuji Obs
     geodata.gauges.append([9,139.428901803617,42.076636582137,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([10,139.427853421935,42.065461519438,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([11,139.451539852594,42.044696547058,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([12,139.456528443496,42.051692262353,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([13,139.456528443496,42.051692262353,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([10,139.427853421935,42.065461519438,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([11,139.451539852594,42.044696547058,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([12,139.456528443496,42.051692262353,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([14,139.472013750592,42.058089880433,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([16,139.515046095129,42.215249086323,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([18,139.554549379772,42.226981643110,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([20,139.493430734366,42.064501276365,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([21,139.547459850688,42.187448788669,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([22,139.525898248343,42.171012210670,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([23,139.562524223190,42.211983687588,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([24,139.519099729509,42.113058045853,0.0,1e9]) ## Tsuji Obs
+    geodata.gauges.append([25,139.521076578103,42.151376349400,0.0,1e9]) ## Tsuji Obs
     #   
     # == setfixedgrids.data values ==
 
     geodata.fixedgrids = []
     
+    tstart = {}
+    for i in range(1,27):
+        tstart[i] = 3*60
+    tstart[14] = 4*60
+    tstart[18] = 5*60
+    tstart[20] = 4*60
+    tstart[21] = 6*60
+    tstart[22] = 6*60
+    tstart[23] = 5*60
+    tstart[24] = 6*60
+
+    tend = {}
+    for i in range(1,11):
+        tend[i] = 8*60
+    for i in range(11,26):
+        tend[i] = 20*60
+    from numpy import floor
+
     for g in geodata.gauges:
         xg = g[1]
         yg = g[2]
-        xg1 = xg - 0.001
+        xg1 = xg - 0.002
         xg2 = xg + 0.002
-        yg1 = yg - 0.001
+        yg1 = yg - 0.002
         yg2 = yg + 0.002
-        nx = 31
-        ny = 31
+        nx = 41
+        ny = 41
+
         gaugeno = g[0]
-        if gaugeno == 9:
-            xg2 = xg + 0.003
-            nx = 41
-        if gaugeno == 8:
+        if gaugeno == 14:
             xg1 = xg - 0.002
-            xg2 = xg + 0.001
+            xg2 = xg + 0.002
+            yg1 = yg - 0.001
+            yg2 = yg + 0.004
+            nx = 41
+            ny = 51
+        if gaugeno == 12:
+            xg1 = xg - 0.003
+            xg2 = xg + 0.002
             yg1 = yg - 0.002
-            yg2 = yg + 0.001
+            yg2 = yg + 0.003
+            nx = 51
+            ny = 51
+        if gaugeno == 9:
+            xg1 = xg - 0.002
+            xg2 = xg + 0.005
+            yg1 = yg - 0.002
+            yg2 = yg + 0.002
+            nx = 71
+            ny = 41
+        if gaugeno == 10:
+            xg1 = xg - 0.002
+            xg2 = xg + 0.006
+            yg1 = yg - 0.002
+            yg2 = yg + 0.002
+            nx = 81
+            ny = 41
+
             
-        geodata.fixedgrids.append([210.0,360.0,11,xg1,xg2,yg1,yg2,nx,ny,0,1])
-        geodata.regions.append([5, 5, 180., 1e9, xg1,xg2,yg1,yg2])
+        ng = int(floor((tend[gaugeno]-tstart[gaugeno])/60))+1  # every 60 sec.
+        print "+++ gaugeno, tstart[gaugeno],tend[gaugeno],ng: ",\
+                gaugeno, tstart[gaugeno],tend[gaugeno],ng
+        geodata.fixedgrids.append([tstart[gaugeno],tend[gaugeno],\
+                ng,xg1,xg2,yg1,yg2,nx,ny,0,1])
+        geodata.regions.append([5, 5, tstart[gaugeno], tend[gaugeno], \
+                xg1-0.001,xg2+0.001,yg1-0.001,yg2+0.001])
         
     
     return rundata

@@ -280,10 +280,10 @@ def setgeo(rundata):
     geodata.wavetolerance = 1.e-1  ##
     geodata.depthdeep = 1.e6  ## Definition of "deep" water
     geodata.maxleveldeep = 10  ## Restriction on the number of deep water levels
-    geodata.ifriction = 0 ## Friction switch.  0=off,  1=on
-    geodata.coeffmanning =0.0
-    # geodata.coeffmanning =.025
-    geodata.frictiondepth = 1.e6  ## Apply friction at all depths
+    geodata.ifriction = 1 ## Friction switch.  0=off,  1=on
+    # geodata.coeffmanning =0.0
+    geodata.coeffmanning =.025
+    geodata.frictiondepth = 10.
 
     #okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
       #+ 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##

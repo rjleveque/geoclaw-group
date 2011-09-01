@@ -14,10 +14,11 @@ CLAWMAKE = $(CLAW)/util/Makefile.common
 
 CLAW_PKG = geoclaw                  # Clawpack package to use
 CLAW_EXE = xgeoclaw                 # Executable to create
-CLAW_setrun_file = setrun.py        # File containing function to make data
-CLAW_OUTDIR = _output_16-26         # Directory for output
+CLAW_setrun_file = setrun_16-26.py        # File containing function to make data
+CLAW_OUTDIR = _output_16-26_2         # Directory for output
 CLAW_setplot_file = setplot.py      # File containing function to set plots
 CLAW_PLOTDIR = _plots               # Directory for plots
+CLAW_RESTART = True
 
 # Environment variable FC should be set to fortran compiler, e.g. gfortran
 FC ?= gfortran   # default if not set as environment variable

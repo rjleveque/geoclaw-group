@@ -47,7 +47,7 @@ CLAW_LIBSOURCES = \
   $(GEOLIB)/cellgridintegrate_geo.f \
   $(GEOLIB)/topointegral_geo.f \
   $(GEOLIB)/bilinearintegral_geo.f \
-  $(GEOLIB)/stepgrid_geo.f \
+  stepgrid_geo.f \
   $(GEOLIB)/fgridinterp_geo.f \
   $(GEOLIB)/fgridout_geo.f \
   $(GEOLIB)/rpn2ez_geo.f \

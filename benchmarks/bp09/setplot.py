@@ -181,7 +181,7 @@ def setplot(plotdata):
     #-----------------------------------------
 
     plotfigure = plotdata.new_plotfigure(name='speed', figno=20)
-    plotfigure.show = True  # Turn the pcolor plot on or off (True or False) 
+    plotfigure.show = False  # Turn the pcolor plot on or off (True or False) 
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes('pcolor')

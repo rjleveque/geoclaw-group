@@ -24,7 +24,7 @@ def setplotfg(fgno=1, outdir='_output'):
     # Fixed grid to display:
     fgdata.fgno = fgno
 
-    if fgno==1:
+    if fgno>0:
 
         # Plot parameters for Fixed Grid 1.
         # Repeat as needed for other fixed grids.
@@ -46,10 +46,10 @@ def setplotfg(fgno=1, outdir='_output'):
 
         # For plot of inundation region:
         fgdata.inundated_show = True
-        fgdata.inundated_cmap =  colormaps.make_colormap({0:[0,0,1],\
-                1:[0,1,1],1.01:[0,1,1], 4:[0,1,0], 10:[1,0,0]})
-
+        fgdata.inundated_cmap =  colormaps.make_colormap({0:[0,0.3,1],\
+                1:[0,1,1],1.01:[0,1,1], 4:[0,1,0], 10:[1,0.2,0.2]})
         fgdata.inundated_clim =(0,10)
+        fgdata.inundated_add_colorbar = False
 
         # For plot of exposed seafloor:
         fgdata.seafloor_show = False

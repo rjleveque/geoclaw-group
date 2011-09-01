@@ -1,4 +1,3 @@
-## Randy:  This run took about 4 hours, as it is set up now.
 
 """
 Module to set up run time parameters for Clawpack.
@@ -38,11 +37,6 @@ def setrun(claw_pkg='geoclaw'):
 
     #probdata = rundata.new_UserData(name='probdata',fname='setprob.data')
 
-    #------------------------------------------------------------------
-    # GeoClaw specific parameters:
-    #------------------------------------------------------------------
-
-    rundata = setgeo(rundata)   # Defined below
 
     #------------------------------------------------------------------
     # Standard Clawpack parameters to be written to claw.data:
@@ -122,8 +116,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Note:  Frame time intervals = (tfinal-t0)/nout
-        clawdata.nout = 10 ## Number of frames (plus the t = 0.0 frame)
-        clawdata.tfinal = 6.5*60  ## End run time in Seconds
+        clawdata.nout = 17 ## Number of frames (plus the t = 0.0 frame)
+        clawdata.tfinal = 17*60  ## End run time in Seconds
                 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -246,6 +240,12 @@ def setrun(claw_pkg='geoclaw'):
 
     # More AMR parameters can be set -- see the defaults in pyclaw/data.py
 
+    #------------------------------------------------------------------
+    # GeoClaw specific parameters:
+    #------------------------------------------------------------------
+
+    rundata = setgeo(rundata)   # Defined below
+
     return rundata
     # end of function setrun
     # ----------------------
@@ -280,9 +280,9 @@ def setgeo(rundata):
     geodata.depthdeep = 1.e6  ## Definition of "deep" water
     geodata.maxleveldeep = 10  ## Restriction on the number of deep water levels
     geodata.ifriction = 1 ## Friction switch.  0=off,  1=on
-    # geodata.coeffmanning =0.0
+    #geodata.coeffmanning =0.0
     geodata.coeffmanning =.025
-    geodata.frictiondepth = 10.
+    geodata.frictiondepth = 1.e6  ## Apply friction at all depths
 
     #okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
       #+ 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
@@ -345,53 +345,27 @@ def setgeo(rundata):
     #geodata.regions.append([1, 1, 0., 1e9,   0.0,  360.0, -90.0,  90.0])  ## OK24: 24-s, ~550-740 m Entire Domain
     geodata.regions.append([1, 2, 0., 1e9, 138.5,  139.7,  41.4,  43.3])  ## OK08: 8-s, ~184-247 m Okushiri 
     geodata.regions.append([1, 3, 0., 1e9, 139.39, 139.6,  42.0,  42.25])  ## OK03: 2.67 s (8/3s), ~61-82 m Okushiri 
+    geodata.regions.append([1, 4, 0., 1e9, 139.41, 139.49, 42.02, 42.08])  ## 
+    
+    geodata.regions.append([5, 5, 180., 1e9, 139.44,139.46,42.035,42.055])  ## Aonae 
     # geodata.regions.append([1, 4, 0., 1e9, 139.42, 139.57, 42.03, 42.23])  ## AO15: 0.53-8/9 s, ~16.5-20.4 m, Aonae 
     #geodata.regions.append([1, 4, 0., 1e9, 139.40, 139.46, 42.03, 42.22])  ## West coast Okushiri
-    geodata.regions.append([4, 4, 90., 1e9, 139.42, 139.431, 42.07, 42.12])
+    #geodata.regions.append([4, 4, 90., 1e9, 139.4, 139.432, 42.12, 42.2])
+    #geodata.regions.append([4, 4, 90., 1e9, 139.4, 139.43, 42.02, 42.08])
+    #geodata.regions.append([4, 4, 90., 1e9, 139.46, 139.55, 42.04, 42.14])
     
 
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     
-    # geodata.gauges.append([1,139.429211710298,42.188181491811,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([3,139.411185686023,42.162762869034,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([5,139.418261206409,42.137404393442,0.0,1e9]) ## Tsuji Obs
-    geodata.gauges.append([6,139.428035766149,42.093012384481,0.0,1e9]) ## Tsuji Obs
-    geodata.gauges.append([7,139.426244998662,42.116554785296,0.0,1e9]) ## Tsuji Obs
-    geodata.gauges.append([8,139.423714744650,42.100414145210,0.0,1e9]) ## Tsuji Obs
-    geodata.gauges.append([9,139.428901803617,42.076636582137,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([10,139.427853421935,42.065461519438,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([11,139.451539852594,42.044696547058,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([12,139.456528443496,42.051692262353,0.0,1e9]) ## Tsuji Obs
-    # geodata.gauges.append([13,139.456528443496,42.051692262353,0.0,1e9]) ## Tsuji Obs
     #   
     # == setfixedgrids.data values ==
 
     geodata.fixedgrids = []
     
-    for g in geodata.gauges:
-        xg = g[1]
-        yg = g[2]
-        xg1 = xg - 0.001
-        xg2 = xg + 0.002
-        yg1 = yg - 0.001
-        yg2 = yg + 0.002
-        nx = 31
-        ny = 31
-        gaugeno = g[0]
-        if gaugeno == 9:
-            xg2 = xg + 0.003
-            nx = 41
-        if gaugeno == 8:
-            xg1 = xg - 0.002
-            xg2 = xg + 0.001
-            yg1 = yg - 0.002
-            yg2 = yg + 0.001
-            
-        geodata.fixedgrids.append([210.0,360.0,11,xg1,xg2,yg1,yg2,nx,ny,0,1])
-        geodata.regions.append([5, 5, 180., 1e9, xg1,xg2,yg1,yg2])
         
+    geodata.fixedgrids.append([200.0,16*60.,27,139.44,139.46,42.035,42.055,200,200,0,1]) ## Aonae Peninsula Runup
     
     return rundata
 
