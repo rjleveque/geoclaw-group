@@ -13,10 +13,14 @@ for line in lines:
         y = float(tokens[2])
         obs = float(tokens[5])
         try:
-            geoclaw = float(tokens[6])
+            geo_nofric = float(tokens[6])
         except:
-            geoclaw = nan
-        gauges.append([gaugeno,x,y,obs,geoclaw])
+            geo_nofric = nan
+        try:
+            geo_fric = float(tokens[7])
+        except:
+            geo_fric = nan
+        gauges.append([gaugeno,x,y,obs,geo_nofric,geo_fric])
 
 gauges = array(gauges)
 
@@ -57,7 +61,6 @@ y0 = 42.14
 x = gauges[:,1]
 y = gauges[:,2]
 obs = gauges[:,3]
-geo = gauges[:,4]
 xg = (x - x0)
 yg = (y - y0)
 theta = arctan(yg/xg)
@@ -71,8 +74,6 @@ xz = cost
 yz = sint
 xobs = xz + s*obs*cost
 yobs = yz + s*obs*sint
-xgeo = xz + s*geo*cost
-ygeo = yz + s*geo*sint
 
 # plot circles
 xc = cos(linspace(0,2*pi,500))
@@ -82,14 +83,23 @@ for r in range(0,36,10):
     plot((1+s*r)*xc,(1+s*r)*yc,'k')
     text(-0.2,1+s*(r+1),'%s meters' % r)
 
-plot(xgeo,ygeo,'g^',markersize=10)
-plot(xobs,yobs,'ro')
+
 xg = 6.*(x - x0)
 yg = 6.*(y - y0)
+
+for geo in [gauges[:,4], gauges[:,5]]:
+    # do for both geo_nofic and geo_fric
+    xgeo = xz + s*geo*cost
+    ygeo = yz + s*geo*sint
+    plot(xgeo,ygeo,'g^',markersize=10)
+    for i in range(len(x)):
+        plot([cost[i],xgeo[i]],[sint[i],ygeo[i]],'g-')
+
+plot(xobs,yobs,'ro')
 plot(xg,yg,'ko')
 for i in range(len(x)):
-    plot([xg[i],xobs[i]],[yg[i],yobs[i]],'k-')
-    plot([xg[i],xgeo[i]],[yg[i],ygeo[i]],'g-')
+    plot([xg[i],cost[i]],[yg[i],sint[i]],'k-')
+    plot([cost[i],xobs[i]],[sint[i],yobs[i]],'r-')
 
 axis('scaled')
 #title('Run-up (red circles = observations)')
