@@ -122,8 +122,8 @@ def setrun(claw_pkg='geoclaw'):
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
         # Note:  Frame time intervals = (tfinal-t0)/nout
-        clawdata.nout = 7 ## Number of frames (plus the t = 0.0 frame)
-        clawdata.tfinal = 350.  ## End run time in Seconds
+        clawdata.nout = 5 ## Number of frames (plus the t = 0.0 frame)
+        clawdata.tfinal = 300.  ## End run time in Seconds
                 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -279,10 +279,10 @@ def setgeo(rundata):
     geodata.wavetolerance = 1.e-1  ##
     geodata.depthdeep = 1.e6  ## Definition of "deep" water
     geodata.maxleveldeep = 10  ## Restriction on the number of deep water levels
-    geodata.ifriction = 0 ## Friction switch.  0=off,  1=on
-    geodata.coeffmanning =0.0
-    # geodata.coeffmanning =.025
-    geodata.frictiondepth = 1.e6  ## Apply friction at all depths
+    geodata.ifriction = 1 ## Friction switch.  0=off,  1=on
+    # geodata.coeffmanning =0.0
+    geodata.coeffmanning =.025
+    geodata.frictiondepth = 10.
 
     #okushiri_dir = '/Users/FrankGonzalez/daily/modeling/tsunami-benchmarks/github/' \
       #+ 'FrankGonzalez/geoclaw-group/benchmarks/bp09' ##
@@ -466,7 +466,7 @@ def setgeo(rundata):
 
     #geodata.fixedgrids.append([0.0,1200.0,5,139.42309065950826,139.42416180042954, \
     #     42.099625599311729,42.100760429693182,40,40,0,1]) ## Sta 500 Monae Runup
-    geodata.fixedgrids.append([220.0,300.0,17,139.422,139.425, \
+    geodata.fixedgrids.append([220.0,300.0,9,139.422,139.425, \
          42.097,42.101,150,200,0,1]) ## Sta 500 Monae Runup
     
     # geodata.fixedgrids.append([0.0,21*60.,5,139.43,139.48, \

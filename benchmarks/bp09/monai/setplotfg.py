@@ -29,7 +29,7 @@ def setplotfg(fgno=1, outdir='_output'):
         # Plot parameters for Fixed Grid 1.
         # Repeat as needed for other fixed grids.
         # Contour levels for all plots:
-        fgdata.clines = arange(-20,32,4)
+        fgdata.clines = arange(-20,33,4)
 
         # For plot of surface eta each frame:
         fgdata.eta_show = True

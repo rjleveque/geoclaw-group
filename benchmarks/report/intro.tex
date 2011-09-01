@@ -62,6 +62,8 @@ form
 D = \frac{gM^2\sqrt{(u^2+v^2)}}{h^{5/3}}
 \end{equation}
 where $M$ is the Manning coefficient, generally taken to be $0.025$. 
+Comparisons with and without friction have been performed in \Sec{bp9} for
+Benchmark Problem \#9.
 
 Coriolis terms can be turned on in GeoClaw, but have not been used for
 any of the benchmark problems.
@@ -228,6 +230,13 @@ function of $x$ at time $t=0$, representing a propagating wave form.
 Again the Riemann invariants can be used to
 determine the momentum at each point in order to specify initial
 conditions.
+
+For Benchmark Problem \#9 (\Sec{bp9}) the seafloor displacement is
+specified.  This is what is generally done in real applications.  GeoClaw
+allows specifying a time-varying seafloor displacement as well, to model the
+dynamic rupture of faults.  This capability has been used in the landslide
+problems (\Sec{bp3} and \Sec{bp8a}) as well to model the changing
+bathymetry.
 
 
 
