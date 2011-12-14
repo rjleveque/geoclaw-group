@@ -43,7 +43,8 @@ Schematic of computational domain.
 \subsubsection{What we did}
 
 \begin{itemize}
-\item Used $g=1$ and no friction.
+\item Used $g=1$ and no friction.  We also tried using friction with Manning
+coefficient 0.025 and observed no difference.
 \item The bathymetry consisted of a deep plateau of constant depth $d$
 connected to a sloping beach of angle $\beta = \text{arccot}(19.85)$.
 Note that the toe of the beach was located at $x = X_0 = d\, \text{cot} \beta$
@@ -71,7 +72,7 @@ spanned from $x = -10$ to $x = 60$.
 \item Tasks a and b:
 Figures \ref{bp2framesa} and \ref{bp2framesb} present the computed and measured surface profiles for the low and high amplitude cases, respectively.  Correspondence is excellent in the low amplitude case.  In the high amplitude case the computed amplitude is smaller and the steepness greater than that of the measured wave -- a consequence of the fact that the experimental parameters violate the shallow water wave assumptions.
 \item Task c: This optional task was not addressed.
-\item Task d:  Figures \ref{MaxRunup0185} and \ref{MaxRunup3} present the results for maximum runup computations for the low amplitude and high amplitude wave cases.  The results can be expressed as the non-dimensional data pairs (H/d,R/d) = (0.0185,0.085) and (0.3,0.42) for the high and low amplitude cases, respectively.  The low amplitude result falls well within the scatter plot results of Zhan \cite{bp-description} presented in Figure \ref{bp4maxrscatter}, while the high amplitude result falls somewhat below, as might be expected in light of the comments made in the Task a and b discussion, above.
+\item Task d:  Figures \ref{MaxRunup0185} and \ref{MaxRunup3} present the results for maximum runup computations for the low amplitude and high amplitude wave cases.  The results can be expressed as the non-dimensional data pairs (H/d,R/d) = (0.0185,0.085) and (0.3,0.67) for the high and low amplitude cases, respectively.  The low amplitude result falls well within the scatter plot results of Zhan \cite{bp-description} presented in Figure \ref{bp4maxrscatter}, while the high amplitude result falls somewhat below, as might be expected in light of the comments made in the Task a and b discussion, above.
 \end{itemize}
 
 \begin{figure}[ht]
@@ -108,9 +109,9 @@ Maximum runup estimate of 0.085 cm for the low amplitude case, occurring at 55 s
 \end{figure}
 
 \begin{figure}[ht]
-\hfil\includegraphics[width=2.8in]{bp4/MaxRunup3.pdf}\hfil
+\hfil\includegraphics[width=2.8in]{bp4/MaxRunup3.png}\hfil
 \caption{\label{MaxRunup3} 
-Maximum runup estimate of 0.42 cm for the high amplitude case, occurring at 40 seconds of the computation. 
+Maximum runup estimate of 0.67 cm for the high amplitude case, occurring at 47 seconds of the computation. 
 }
 \end{figure}
 
@@ -126,6 +127,6 @@ Scatter plot of nondimensional maximum runup, R/d, versus nondimensional inciden
 
 For test cases in which amplitudes are so large that the shallow water wave assumptions are violated, it can be expected that computed and observed wave height and runup will not agree as well as in cases characterized by amplitudes for which the shallow water wave assumptions are valid.
 
-For the high-amplitude $H/d = 0.3$ case, our observed runup of $0.42$
+For the high-amplitude $H/d = 0.3$ case, our observed runup of $0.67$
 agrees well with the experimental results shown in
 Figure~\ref{bp4maxrscatter}.

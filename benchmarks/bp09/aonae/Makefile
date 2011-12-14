@@ -15,7 +15,7 @@ CLAWMAKE = $(CLAW)/util/Makefile.common
 CLAW_PKG = geoclaw                  # Clawpack package to use
 CLAW_EXE = xgeoclaw                 # Executable to create
 CLAW_setrun_file = setrun.py        # File containing function to make data
-CLAW_OUTDIR = _output              # Directory for output
+CLAW_OUTDIR = _output_friction     # Directory for output
 CLAW_setplot_file = setplot.py      # File containing function to set plots
 CLAW_PLOTDIR = _plots               # Directory for plots
 

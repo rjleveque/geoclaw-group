@@ -75,6 +75,26 @@ def setplot(plotdata):
     plotaxes.title = 'Surface'
     plotaxes.scaled = True
 
+    
+    # xlimits = [137.57,141.41] # Full Domain
+    # ylimits = [39.67,44.15] # Full Domain
+    # xlimits = [139., 140.] ## Okushiri Island (Large area)
+    # ylimits = [41.5, 42.5]   ## Okushiri Island  (Large area)
+    # xlimits = [139.43, 139.48] ## Aonae peninsula
+    # ylimits = [42.03, 42.06]   ## Aonae peninsula
+    # xlimits = [139.41, 139.43] ## Monai Long Coast
+    # ylimits = [42.08, 42.15]   ## Monai Long Coast
+    # xlimits = [139.418, 139.426] ## Monai Short
+    # ylimits = [42.096, 42.106]   ## Monai Short
+
+    #xlimits = 'auto'          ## full domain
+    #ylimits = 'auto'          ## full domain
+    xlimits = [139.35, 139.6] ## Okushiri Island (Tight)
+    ylimits = [42.0, 42.25]   ## Okushiri Island (Tight)
+
+    # xlimits and ylimits need to be set for fixup to work!
+    plotaxes.xlimits = xlimits
+    plotaxes.ylimits = ylimits
 
     def fixup(current_data):
         import pylab
@@ -82,24 +102,10 @@ def setplot(plotdata):
         # pylab.title('Surface at %4.2f seconds' % t, fontsize=20)       
         t = t / 60.  # minutes
         pylab.title('Surface at %4.2f minutes' % t, fontsize=20)
-        fix_long_tick_labels()
+        fix_long_tick_labels(xlimits,ylimits)
         addgauges(current_data)
 
     plotaxes.afteraxes = fixup
-    
-    # plotaxes.s = [137.57,141.41] # Full Domain
-    # plotaxes.ylimits = [39.67,44.15] # Full Domain
-    # plotaxes.xlimits = [139., 140.] ## Okushiri Island (Large area)
-    # plotaxes.ylimits = [41.5, 42.5]   ## Okushiri Island  (Large area)
-    # plotaxes.xlimits = [139.43, 139.48] ## Aonae peninsula
-    # plotaxes.ylimits = [42.03, 42.06]   ## Aonae peninsula
-    #plotaxes.xlimits = [139.35, 139.6] ## Okushiri Island (Tight)
-    #plotaxes.ylimits = [42.0, 42.25]   ## Okushiri Island (Tight)
-
-    # plotaxes.xlimits = [139.41, 139.43] ## Monai Long Coast
-    # plotaxes.ylimits = [42.08, 42.15]   ## Monai Long Coast
-    # plotaxes.xlimits = [139.418, 139.426] ## Monai Short
-    # plotaxes.ylimits = [42.096, 42.106]   ## Monai Short
 
     # Water
     plotitem = plotaxes.new_plotitem(plot_type='2d_pcolor')

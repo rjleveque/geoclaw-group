@@ -49,7 +49,7 @@ def setplotfg(fgno=1, outdir='_output'):
         fgdata.inundated_cmap =  colormaps.make_colormap({0:[0,0.3,1],\
                 1:[0,1,1],1.01:[0,1,1], 4:[0,1,0], 10:[1,0.2,0.2]})
         fgdata.inundated_clim =(0,10)
-        fgdata.inundated_add_colorbar = False
+        fgdata.inundated_add_colorbar = True
 
         # For plot of exposed seafloor:
         fgdata.seafloor_show = False
@@ -59,7 +59,7 @@ def setplotfg(fgno=1, outdir='_output'):
         fgdata.save_png = False
 
         fgdata.drytol = 1.e-2
-        fgdata.exposed_tol = 1.e-2
+        fgdata.exposed_tol = 1.e-1
 
 
 

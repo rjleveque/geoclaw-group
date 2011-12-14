@@ -11,6 +11,8 @@ from pyclaw.data import Data
 import pylab
 import glob
 
+print "+++ test"
+
 try:
     from setplotfg import setplotfg
 except:
